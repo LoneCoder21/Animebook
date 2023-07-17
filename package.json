@@ -1,7 +1,8 @@
 {
   "name": "animebook",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend app to view anime listings.",
+  "private": true,  
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +12,16 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoneCoder21/Animebook.git"
+  },
+  "author": "Abhinav Neelam <abhinavneelam949@gmail.com> (https://github.com/LoneCoder21)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoneCoder21/Animebook/issues"
+  },
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
