@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import Home from "./Home";
+import Home from "./pages/Home/Home";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
