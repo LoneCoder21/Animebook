@@ -1,3 +1,9 @@
+import Header from "components/header";
 export default function Random() {
-    return <div>Random page</div>;
+    return (
+        <div>
+            <Header></Header>
+            Random page
+        </div>
+    );
 }

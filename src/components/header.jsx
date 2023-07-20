@@ -5,8 +5,8 @@ export default function Header() {
     return (
         <header>
             <Link to={`/`}>Home</Link>
-            <Link to={`popular`}>Popular</Link>
-            <Link to={`random`}>Random</Link>
+            <Link to={`/popular`}>Popular</Link>
+            <Link to={`/random`}>Random</Link>
         </header>
     );
 }
