@@ -1,6 +1,6 @@
+import "assets/home.scss";
+import Recommendations from "./recommendations";
 import Header from "components/header";
-import "assets/Home.scss";
-import Recommendations from "./Recommendations";
 
 export default function Home() {
     return (

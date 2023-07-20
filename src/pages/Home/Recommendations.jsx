@@ -1,4 +1,4 @@
-import "./Recommendation.scss";
+import "assets/recommendation.scss";
 
 function Recommendation({ url, title }) {
     return (
