@@ -1,0 +1,41 @@
+.recommendation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+h2 {
+    color: rgb(5, 80, 21);
+    text-align: center;
+}
+
+button {
+    border: 0;
+    padding: 0;
+}
+
+img:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    border: medium solid green;
+}
+
+.tag {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    color: rgb(24, 66, 7);
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.tag:hover {
+    cursor: pointer;
+    color: rgb(12, 226, 59);
+}

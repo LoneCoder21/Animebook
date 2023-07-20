@@ -1,5 +1,6 @@
 import "./Home.scss";
+import Recommendations from "./Recommendations";
 
 export default function Home() {
-    return <p className="pop"> Home page </p>;
+    return <Recommendations></Recommendations>;
 }
