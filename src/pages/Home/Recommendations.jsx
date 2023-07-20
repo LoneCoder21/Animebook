@@ -4,7 +4,7 @@ function Recommendation({ url, title }) {
     return (
         <div className="recommendation">
             <img src={url} alt={title}></img>
-            <button className="tag">
+            <button>
                 <b>{title}</b>
             </button>
         </div>
@@ -19,7 +19,7 @@ export default function Recommendations() {
 
     return (
         <div>
-            <h2>Recommendations</h2>
+            <h2 className="recommendation_title">Recommendations</h2>
             {data.map((item) => {
                 return <Recommendation key={item.title} url={item.url} title={item.title}></Recommendation>;
             })}
