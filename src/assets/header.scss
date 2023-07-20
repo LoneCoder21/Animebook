@@ -5,15 +5,15 @@ header {
     justify-content: left;
     align-items: center;
     opacity: 0.7;
-}
 
-header * {
-    padding: 0 30px;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
+    & > * {
+        padding: 0 30px;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
 
-header *:hover {
-    color: brown;
+        &:hover {
+            color: brown;
+        }
+    }
 }

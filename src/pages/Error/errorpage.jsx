@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import "./error.scss";
+import "assets/error.scss";
 import Header from "components/header";
 import { Link } from "../../../node_modules/react-router-dom/dist/index";
 

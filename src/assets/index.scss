@@ -4,6 +4,7 @@ body {
         "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image: url("https://i.pinimg.com/originals/a5/46/d8/a546d8368c493759dfd3e9f9fc30b515.jpg");
 }
 
 code {
@@ -12,4 +13,8 @@ code {
 
 p {
     text-align: center;
+}
+
+button {
+    cursor: pointer;
 }
