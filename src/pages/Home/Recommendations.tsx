@@ -1,15 +1,4 @@
-import "assets/recommendation.scss";
-
-function Recommendation({ url, title }) {
-    return (
-        <div className="recommendation">
-            <img src={url} alt={title}></img>
-            <button>
-                <b>{title}</b>
-            </button>
-        </div>
-    );
-}
+import "../../assets/recommendation.scss";
 
 export default function Recommendations() {
     const data = [
@@ -21,7 +10,14 @@ export default function Recommendations() {
         <div>
             <h2 className="recommendation_title">Recommendations</h2>
             {data.map((item) => {
-                return <Recommendation key={item.title} url={item.url} title={item.title}></Recommendation>;
+                return (
+                    <div className="recommendation">
+                        <img src={item.url} alt={item.title}></img>
+                        <button>
+                            <b>{item.title}</b>
+                        </button>
+                    </div>
+                );
             })}
         </div>
     );
