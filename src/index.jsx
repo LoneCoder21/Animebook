@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "assets/index.scss";
-import Home from "./pages/Home/home";
+import Home from "./pages/Home/Home";
 import Popular from "./pages/Popular/popular";
 import Random from "./pages/Random/random";
 import ErrorPage from "./pages/Error/errorpage";

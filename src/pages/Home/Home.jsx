@@ -1,5 +1,5 @@
 import "assets/home.scss";
-import Recommendations from "./recommendations";
+import Recommendations from "./Recommendations";
 import Header from "components/header";
 
 export default function Home() {
