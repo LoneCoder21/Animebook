@@ -1,4 +1,4 @@
-import "../../assets/recommendation.scss";
+import "assets/recommendation.scss";
 
 export default function Recommendations() {
     const data = [
