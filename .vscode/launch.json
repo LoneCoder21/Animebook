@@ -19,9 +19,12 @@
             "name": "Firefox Debug",
             "type": "firefox",
             "request": "launch",
-            "reAttach": true,
+            "reAttach": false,
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "keepProfileChanges": true,
+            "clearConsoleOnReload": true,
+            "profile": "dev-edition-default"
         }
     ]
 }
