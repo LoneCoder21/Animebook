@@ -1,10 +1,28 @@
-.popular_options_form {
+.popular_options {
     display: flex;
-    align-items: center;
     justify-content: center;
+    opacity: 0.9;
+
+    p {
+        font-size: 20px;
+        font-weight: 550;
+        line-height: 0;
+    }
 
     p,
     label {
         text-transform: capitalize;
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    & > form {
+        background-color: #dcffc9;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
     }
 }

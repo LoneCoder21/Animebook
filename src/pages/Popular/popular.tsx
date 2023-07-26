@@ -73,26 +73,27 @@ export function OptionsForm({
     setDataCallback: Dispatch<OptionState[]>;
 }) {
     return (
-        <form
-            className="popular_options_form"
-            onSubmit={(e) => {
-                e.preventDefault();
-            }}
-        >
-            {query_options.map((item, index) => {
-                // for each option
-                return (
-                    <Option
-                        key={item.type}
-                        {...item}
-                        fullData={data}
-                        data={data[index]}
-                        setDataCallback={setDataCallback}
-                        option_index={index}
-                    />
-                );
-            })}
-        </form>
+        <div className="popular_options">
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                }}
+            >
+                {query_options.map((item, index) => {
+                    // for each option
+                    return (
+                        <Option
+                            key={item.type}
+                            {...item}
+                            fullData={data}
+                            data={data[index]}
+                            setDataCallback={setDataCallback}
+                            option_index={index}
+                        />
+                    );
+                })}
+            </form>
+        </div>
     );
 }
 
