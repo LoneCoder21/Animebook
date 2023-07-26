@@ -1,0 +1,10 @@
+.popular_options_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p,
+    label {
+        text-transform: capitalize;
+    }
+}
