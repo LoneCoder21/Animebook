@@ -103,10 +103,11 @@ export function OptionsForm({
 export default function Popular() {
     let [data, setData] = useState<OptionState[]>(createOptionState());
 
-    const animes = [
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }
-    ];
+    const animes = [{ url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }];
+
+    for (let i = 0; i < 17; ++i) {
+        animes.push(animes[0]);
+    }
 
     return (
         <div className="popular">
@@ -114,7 +115,7 @@ export default function Popular() {
             <OptionsForm data={data} setDataCallback={setData} />
             <div className="grid_container">
                 {animes.map((item) => {
-                    return <Recommendation key={item.title} {...item} width="10%" />;
+                    return <Recommendation key={item.title} {...item} width="80%" />;
                 })}
             </div>
         </div>
