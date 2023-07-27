@@ -4,6 +4,10 @@
     align-items: center;
     margin-top: 20px;
 
+    img {
+        height: auto;
+    }
+
     > img:hover {
         cursor: pointer;
         border-radius: 10px;

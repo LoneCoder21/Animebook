@@ -1,9 +1,9 @@
 import "assets/recommendation.scss";
 
-export function Recommendation({ url, title }: { url: string; title: string }) {
+export function Recommendation({ url, title, width }: { url: string; title: string; width: string }) {
     return (
         <div className="recommendation">
-            <img src={url} alt={title}></img>
+            <img src={url} alt={title} style={{ width: width }}></img>
             <button>
                 <b>{title}</b>
             </button>
@@ -21,7 +21,7 @@ export default function Recommendations() {
         <div>
             <h2 className="recommendation_title">Recommendations</h2>
             {data.map((item) => {
-                return <Recommendation key={item.title} {...item} />;
+                return <Recommendation key={item.title} {...item} width="10%" />;
             })}
         </div>
     );

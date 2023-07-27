@@ -1,4 +1,5 @@
 import Header from "components/header";
+import { Recommendation } from "pages/Home/Recommendations";
 import { Fragment, useState, Dispatch } from "react";
 import "assets/popular.scss";
 
@@ -102,10 +103,20 @@ export function OptionsForm({
 export default function Popular() {
     let [data, setData] = useState<OptionState[]>(createOptionState());
 
+    const animes = [
+        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
+        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }
+    ];
+
     return (
         <div className="popular">
             <Header></Header>
             <OptionsForm data={data} setDataCallback={setData} />
+            <div className="grid_container">
+                {animes.map((item) => {
+                    return <Recommendation key={item.title} {...item} width="10%" />;
+                })}
+            </div>
         </div>
     );
 }
