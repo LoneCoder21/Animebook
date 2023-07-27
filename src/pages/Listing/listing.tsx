@@ -12,7 +12,7 @@ export function Listing({ anime_id }: { anime_id: number }) {
 }
 
 function isGoodParam(id: string | undefined) {
-    return typeof id !== "undefined" && /^\d+$/.test(id);
+    return typeof id !== "undefined" && /^\d+$/.test(id); // checks if string is a number
 }
 
 export default function ListingEntry() {
@@ -20,11 +20,7 @@ export default function ListingEntry() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (typeof id === "undefined") {
-            return;
-        }
         if (!isGoodParam(id)) {
-            //check if id is a number
             navigate("/error", { replace: true });
         }
     }, [id, navigate]);
