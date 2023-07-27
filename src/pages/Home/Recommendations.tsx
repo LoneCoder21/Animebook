@@ -1,5 +1,16 @@
 import "assets/recommendation.scss";
 
+export function Recommendation({ url, title }: { url: string; title: string }) {
+    return (
+        <div className="recommendation">
+            <img src={url} alt={title}></img>
+            <button>
+                <b>{title}</b>
+            </button>
+        </div>
+    );
+}
+
 export default function Recommendations() {
     const data = [
         { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
@@ -10,14 +21,7 @@ export default function Recommendations() {
         <div>
             <h2 className="recommendation_title">Recommendations</h2>
             {data.map((item) => {
-                return (
-                    <div className="recommendation">
-                        <img src={item.url} alt={item.title}></img>
-                        <button>
-                            <b>{item.title}</b>
-                        </button>
-                    </div>
-                );
+                return <Recommendation key={item.title} {...item} />;
             })}
         </div>
     );
