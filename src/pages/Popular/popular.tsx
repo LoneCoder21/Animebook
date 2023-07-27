@@ -111,7 +111,7 @@ export default function Popular() {
 
     return (
         <div className="popular">
-            <Header></Header>
+            <Header />
             <OptionsForm data={data} setDataCallback={setData} />
             <div className="grid_container">
                 {animes.map((item) => {

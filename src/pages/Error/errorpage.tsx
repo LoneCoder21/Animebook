@@ -21,7 +21,7 @@ export default function ErrorPage() {
 
     return (
         <div className="errorpage">
-            <Header></Header>
+            <Header />
             <section>
                 <h1>Error!</h1>
                 <h2>Sorry, an unexpected error has occurred.</h2>

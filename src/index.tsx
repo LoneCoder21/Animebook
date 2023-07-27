@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home";
 import Popular from "./pages/Popular/popular";
 import Random from "./pages/Random/random";
 import Error from "./pages/Error/errorpage";
-import Listing from "./pages/Listing/listing";
+import ListingEntry from "./pages/Listing/listing";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/listing/:id",
-        element: <Listing></Listing>
+        element: <ListingEntry></ListingEntry>
     }
 ]);
 
