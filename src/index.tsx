@@ -4,7 +4,8 @@ import "./assets/index.scss";
 import Home from "./pages/Home/Home";
 import Popular from "./pages/Popular/popular";
 import Random from "./pages/Random/random";
-import ErrorPage from "./pages/Error/errorpage";
+import Error from "./pages/Error/errorpage";
+import Listing from "./pages/Listing/listing";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -12,17 +13,26 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Home></Home>,
-        errorElement: <ErrorPage />
+        errorElement: <Error />
+    },
+    {
+        path: "/error",
+        element: <Error></Error>,
+        errorElement: <Error />
     },
     {
         path: "/popular",
         element: <Popular></Popular>,
-        errorElement: <ErrorPage />
+        errorElement: <Error />
     },
     {
         path: "/random",
         element: <Random></Random>,
-        errorElement: <ErrorPage />
+        errorElement: <Error />
+    },
+    {
+        path: "/listing/:id",
+        element: <Listing></Listing>
     }
 ]);
 
