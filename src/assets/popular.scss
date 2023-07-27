@@ -30,9 +30,10 @@
 .popular {
     .grid_container {
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         justify-content: center;
         align-content: center;
+        margin: 0px 20%;
         margin-top: 10px;
         margin-bottom: 20px;
 

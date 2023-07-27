@@ -5,6 +5,7 @@
     margin-top: 20px;
 
     > img {
+        box-sizing: border-box;
         height: auto;
 
         &:hover {

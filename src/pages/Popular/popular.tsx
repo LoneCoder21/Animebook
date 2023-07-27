@@ -105,7 +105,7 @@ export default function Popular() {
 
     const animes = [{ url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }];
 
-    for (let i = 0; i < 17; ++i) {
+    for (let i = 0; i < 14; ++i) {
         animes.push(animes[0]);
     }
 
@@ -115,7 +115,7 @@ export default function Popular() {
             <OptionsForm data={data} setDataCallback={setData} />
             <div className="grid_container">
                 {animes.map((item) => {
-                    return <Recommendation key={item.title} {...item} width="80%" />;
+                    return <Recommendation key={item.title} {...item} width="83%" />;
                 })}
             </div>
         </div>
