@@ -1,0 +1,50 @@
+@use "../../input/radiobutton";
+
+.popular_options {
+    display: flex;
+    justify-content: center;
+    opacity: 0.9;
+
+    p {
+        font-size: 20px;
+        font-weight: 550;
+        line-height: 0;
+    }
+
+    p,
+    label {
+        text-transform: capitalize;
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    & > form {
+        background-color: #dcffc9;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.popular {
+    .grid_container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        justify-content: center;
+        align-content: center;
+        margin: 0px 20%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        > * {
+            margin-top: 10px;
+        }
+    }
+}
+
+.popular_radio_button {
+    @include radiobutton.radiobuttonhorizontal(green, rgb(75, 224, 125));
+}

@@ -15,10 +15,13 @@ p {
     text-align: center;
 }
 
-button {
+button,
+input[type="radio"],
+label {
     cursor: pointer;
 }
 
+button,
 fieldset {
     border: 0;
 }

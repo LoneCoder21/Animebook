@@ -1,7 +1,8 @@
 import Header from "components/header";
 import { Recommendation } from "pages/Home/Recommendations";
-import { Fragment, useState, Dispatch } from "react";
-import "assets/popular.scss";
+import { useState, Dispatch } from "react";
+import "assets/pages/Popular/popular.scss";
+import RadioButtonHorizontal from "components/input/RadioButton";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -40,28 +41,21 @@ export function Option({
         };
     }); //clone the full data
 
+    console.log(data);
+
     return (
-        <fieldset className="option">
+        <fieldset>
             <p>{type}</p>
-            {options.map((item) => {
-                return (
-                    //each input in action
-                    <Fragment key={item}>
-                        <input
-                            type="radio"
-                            id={item}
-                            value={item}
-                            name={type}
-                            defaultChecked={data.option === item}
-                            onChange={() => {
-                                newfullData[option_index].option = item;
-                                setDataCallback(newfullData);
-                            }}
-                        />
-                        <label htmlFor={item}>{item}</label>
-                    </Fragment>
-                );
-            })}
+            <RadioButtonHorizontal
+                type={type}
+                className="popular_radio_button"
+                options={options}
+                checked={data.option}
+                setChosenCallback={(value: string) => {
+                    newfullData[option_index].option = value;
+                    setDataCallback(newfullData);
+                }}
+            />
         </fieldset>
     );
 }
