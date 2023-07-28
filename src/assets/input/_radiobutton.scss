@@ -1,4 +1,8 @@
 @mixin radiobuttonhorizontal($accentcolor, $buttoncolor) {
+    border: solid;
+    border-width: 2px;
+    border-radius: 1px;
+    border-color: grey;
     input {
         accent-color: $accentcolor;
         transform: scale(1.3);
