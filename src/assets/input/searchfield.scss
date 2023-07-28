@@ -1,0 +1,17 @@
+input[type="text"] {
+    color: black;
+    margin: 10px 10px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 1px hidden;
+    outline: none;
+
+    &:hover {
+        border: 1px solid;
+        border-color: grey;
+    }
+
+    &:focus {
+        border-color: black;
+    }
+}
