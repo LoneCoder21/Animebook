@@ -1,4 +1,4 @@
-import "assets/recommendation.scss";
+import "assets/pages/Home/recommendation.scss";
 
 export function Recommendation({ url, title, width }: { url: string; title: string; width: string }) {
     return (

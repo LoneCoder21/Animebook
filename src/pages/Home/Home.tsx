@@ -1,4 +1,4 @@
-import "assets/home.scss";
+import "assets/pages/Home/home.scss";
 import Recommendations from "./Recommendations";
 import Header from "components/header";
 
