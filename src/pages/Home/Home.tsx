@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <div>
             <Header />
-
+            <input type="text" />
             <div className="home">
                 <SearchForm />
                 <Recommendations />
