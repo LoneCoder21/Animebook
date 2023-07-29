@@ -11,5 +11,8 @@
     "scss.format.enable": false,
     "sass.format.enabled": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false
 }

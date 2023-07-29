@@ -20,7 +20,7 @@
 
         #search {
             font-size: 18px;
-            background-color: rgb(220, 255, 201);
+            background-color: rgb(220 255 201);
             color: black;
             opacity: 1;
             margin: 5px;
@@ -40,19 +40,19 @@
 
         .search_button {
             flex-grow: 1;
-            background-color: rgb(75, 224, 125);
+            background-color: rgb(75 224 125);
             margin: 5px 0px;
             padding: 0px 2px;
             font-size: 18px;
 
             &:hover {
-                background-color: rgb(36, 199, 36);
+                background-color: rgb(36 199 36);
             }
         }
     }
 
     .form_radio_button {
-        @include radiobutton.radiobuttonhorizontal(green, rgb(75, 224, 125));
+        @include radiobutton.radiobuttonhorizontal(green, rgb(75 224 125));
         display: inline-block;
         border: 0px;
     }

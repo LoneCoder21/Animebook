@@ -1,7 +1,6 @@
 input[type="range"] {
-    -webkit-appearance: none;
     appearance: none;
-    background-color: rgb(220, 255, 201);
+    background-color: rgb(220 255 201);
     outline: none;
     height: 8px;
     border-radius: 4px;
@@ -10,7 +9,6 @@ input[type="range"] {
 // TODO - fix browser specific styles with cross browser css styles
 
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
     appearance: none;
 }
 
@@ -23,7 +21,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-progress {
-    background-color: rgb(75, 224, 125);
+    background-color: rgb(75 224 125);
     height: 8px;
     border-radius: 4px;
 }

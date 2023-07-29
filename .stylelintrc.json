@@ -1,0 +1,15 @@
+{
+    "extends": "stylelint-config-standard-scss",
+    "rules": {
+        "no-duplicate-selectors": true,
+        "color-named": "always-where-possible",
+        "selector-attribute-quotes": "always",
+        "rule-empty-line-before": null,
+        "selector-class-pattern": null,
+        "length-zero-no-unit": null,
+        "declaration-empty-line-before": null,
+        "comment-empty-line-before": null,
+        "font-family-name-quotes": null,
+        "scss/double-slash-comment-empty-line-before": null
+    }
+}

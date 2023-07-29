@@ -23,17 +23,16 @@
     button {
         background-color: transparent;
         border: none;
-        text-decoration: underline;
         display: inline;
         margin: 0;
         padding: 0;
         margin-top: 5px;
-        color: rgb(24, 66, 7);
+        color: rgb(24 66 7);
         text-decoration: underline;
         font-size: 14px;
 
         &:hover {
-            color: rgb(12, 226, 59);
+            color: rgb(12 226 59);
         }
     }
 
@@ -47,7 +46,7 @@
 }
 
 .recommendation_title {
-    color: rgb(5, 80, 21);
+    color: rgb(5 80 21);
     text-align: center;
     margin: 10px;
 }
