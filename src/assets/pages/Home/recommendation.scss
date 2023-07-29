@@ -1,53 +1,53 @@
 .recommendations {
     height: 100vh;
     overflow-y: scroll;
+}
 
-    .recommendation {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
+.recommendation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 
-        > img {
-            box-sizing: border-box;
-            height: auto;
+    > img {
+        box-sizing: border-box;
+        height: auto;
 
-            &:hover {
-                cursor: pointer;
-                border-radius: 10px;
-                border: medium solid green;
-            }
+        &:hover {
+            cursor: pointer;
+            border-radius: 10px;
+            border: medium solid green;
         }
+    }
 
-        button {
-            background-color: transparent;
-            border: none;
-            text-decoration: underline;
-            display: inline;
-            margin: 0;
-            padding: 0;
-            margin-top: 5px;
-            color: rgb(24, 66, 7);
-            text-decoration: underline;
-            font-size: 14px;
+    button {
+        background-color: transparent;
+        border: none;
+        text-decoration: underline;
+        display: inline;
+        margin: 0;
+        padding: 0;
+        margin-top: 5px;
+        color: rgb(24, 66, 7);
+        text-decoration: underline;
+        font-size: 14px;
 
-            &:hover {
-                color: rgb(12, 226, 59);
-            }
+        &:hover {
+            color: rgb(12, 226, 59);
         }
+    }
 
-        &:first-child {
-            margin-top: 0px;
-        }
+    &:first-child {
+        margin-top: 0px;
+    }
 
-        &:last-child {
-            margin-bottom: 20px;
-        }
+    &:last-child {
+        margin-bottom: 20px;
     }
 }
 
 .recommendation_title {
     color: rgb(5, 80, 21);
     text-align: center;
-    margin: 5px;
+    margin: 10px;
 }
