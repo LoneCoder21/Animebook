@@ -1,0 +1,29 @@
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: rgb(220, 255, 201);
+    outline: none;
+    height: 8px;
+    border-radius: 4px;
+}
+
+// TODO - fix browser specific styles with generic css styles
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="range"]::-moz-range-thumb,
+input[type="range"]::-webkit-slider-thumb {
+    border-radius: 50%;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+input[type="range"]::-moz-range-progress {
+    background-color: rgb(75, 224, 125);
+    height: 8px;
+    border-radius: 4px;
+}
