@@ -4,8 +4,9 @@ header {
     display: flex;
     justify-content: left;
     align-items: center;
-    opacity: 0.9;
-
+    position: sticky;
+    top: 0;
+    z-index: 1;
     & > * {
         padding: 0 30px;
         text-decoration: none;
