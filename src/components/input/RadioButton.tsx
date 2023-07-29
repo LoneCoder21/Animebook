@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 
-// TODO - Fix defaultvalue bug
-
 export default function RadioButtonHorizontal({
     type,
     className = "",
@@ -32,6 +30,7 @@ export default function RadioButtonHorizontal({
                                 value={item}
                                 name={type}
                                 checked={checked === item}
+                                onChange={() => {}}
                             />
                             <label htmlFor={`${type}-${item}`}>{item}</label>
                         </button>

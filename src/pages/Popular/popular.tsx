@@ -41,8 +41,6 @@ export function Option({
         };
     }); //clone the full data
 
-    console.log(data);
-
     return (
         <fieldset>
             <p>{type}</p>

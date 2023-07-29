@@ -34,7 +34,6 @@ export default function SearchForm() {
                     options={["tv", "movie", "ova", "special", "ona", "music"]}
                     checked="tv"
                     setChosenCallback={function (value: string): void {
-                        console.log(value);
                         return;
                     }}
                 />
@@ -46,7 +45,6 @@ export default function SearchForm() {
                     options={["airing", "complete", "upcoming"]}
                     checked="airing"
                     setChosenCallback={function (value: string): void {
-                        console.log(value);
                         return;
                     }}
                 />
@@ -70,7 +68,6 @@ export default function SearchForm() {
                     ]}
                     checked="mal_id"
                     setChosenCallback={function (value: string): void {
-                        console.log(value);
                         return;
                     }}
                 />
@@ -82,7 +79,6 @@ export default function SearchForm() {
                     options={["descending", "ascending"]}
                     checked="descending"
                     setChosenCallback={function (value: string): void {
-                        console.log(value);
                         return;
                     }}
                 />
