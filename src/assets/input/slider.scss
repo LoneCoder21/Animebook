@@ -7,7 +7,7 @@ input[type="range"] {
     border-radius: 4px;
 }
 
-// TODO - fix browser specific styles with generic css styles
+// TODO - fix browser specific styles with cross browser css styles
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;

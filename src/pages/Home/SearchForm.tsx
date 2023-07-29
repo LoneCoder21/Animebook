@@ -1,5 +1,6 @@
 import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
+import "assets/input/date.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
 
 function NamedComponent({ type, children }: { type: string; children: JSX.Element }) {
