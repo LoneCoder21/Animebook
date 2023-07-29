@@ -2,6 +2,9 @@ import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
 import "assets/input/date.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
+import { useState } from "react";
+
+import { BsSearch } from "react-icons/bs";
 
 function NamedComponent({ type, children }: { type: string; children: JSX.Element }) {
     return (
@@ -13,29 +16,60 @@ function NamedComponent({ type, children }: { type: string; children: JSX.Elemen
 }
 
 export default function SearchForm() {
-    const date = new Date();
-    const defaultDate = date.toLocaleDateString("en-CA");
+    const datenow = new Date();
+    const DateToday = datenow.toLocaleDateString("en-CA");
+
+    let [search, setSearch] = useState("");
+    let [score, setScore] = useState(10);
+    let [type, setType] = useState("tv");
+    let [status, setStatus] = useState("airing");
+    let [order, setOrder] = useState("mal_id");
+    let [sort, setSort] = useState("descending");
+    let [date, setDate] = useState(DateToday);
 
     return (
         <form
             className="searchform"
             onSubmit={(e) => {
+                console.log("submitting");
                 e.preventDefault();
             }}
         >
-            <input id="search" type="text" placeholder="Search" />
+            <fieldset className="search">
+                <BsSearch />
+                <input
+                    id="search"
+                    type="text"
+                    placeholder="Search anime"
+                    value={search}
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                    }}
+                />
+                <button className="search_button" type="submit">
+                    Search
+                </button>
+            </fieldset>
             <NamedComponent type="score">
-                <input type="range" min="1" max="100" className="slider" id="myRange" onChange={() => {}}></input>
+                <input
+                    type="range"
+                    min="0"
+                    max="10"
+                    className="slider"
+                    id="score"
+                    value={score}
+                    onChange={(e) => {
+                        setScore(parseInt(e.target.value));
+                    }}
+                ></input>
             </NamedComponent>
             <NamedComponent type="type">
                 <RadioButtonHorizontal
                     type="type"
                     className="form_radio_button"
                     options={["tv", "movie", "ova", "special", "ona", "music"]}
-                    checked="tv"
-                    setChosenCallback={function (value: string): void {
-                        return;
-                    }}
+                    checked={type}
+                    setChosenCallback={setType}
                 />
             </NamedComponent>
             <NamedComponent type="status">
@@ -43,10 +77,8 @@ export default function SearchForm() {
                     type="status"
                     className="form_radio_button"
                     options={["airing", "complete", "upcoming"]}
-                    checked="airing"
-                    setChosenCallback={function (value: string): void {
-                        return;
-                    }}
+                    checked={status}
+                    setChosenCallback={setStatus}
                 />
             </NamedComponent>
             <NamedComponent type="Order By">
@@ -66,10 +98,8 @@ export default function SearchForm() {
                         "members",
                         "favorites"
                     ]}
-                    checked="mal_id"
-                    setChosenCallback={function (value: string): void {
-                        return;
-                    }}
+                    checked={order}
+                    setChosenCallback={setOrder}
                 />
             </NamedComponent>
             <NamedComponent type="sort">
@@ -77,14 +107,19 @@ export default function SearchForm() {
                     type="sort"
                     className="form_radio_button"
                     options={["descending", "ascending"]}
-                    checked="descending"
-                    setChosenCallback={function (value: string): void {
-                        return;
-                    }}
+                    checked={sort}
+                    setChosenCallback={setSort}
                 />
             </NamedComponent>
             <NamedComponent type="Max Date">
-                <input type="date" id="startdate" defaultValue={defaultDate}></input>
+                <input
+                    type="date"
+                    id="startdate"
+                    value={date}
+                    onChange={(e) => {
+                        setDate(e.target.value);
+                    }}
+                ></input>
             </NamedComponent>
         </form>
     );

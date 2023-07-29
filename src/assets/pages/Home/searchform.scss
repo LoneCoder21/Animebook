@@ -1,4 +1,5 @@
 @use "../../input/radiobutton";
+// TODO - Add selected styles
 .searchform {
     height: 100vh;
 
@@ -14,23 +15,39 @@
         }
     }
 
-    #search {
-        border-radius: 10px;
-        width: 98%;
-        height: 5vh;
-        font-size: 18px;
-        background-color: rgb(220, 255, 201);
-        color: black;
-        opacity: 1;
-        margin: 5px;
-        border: 0;
+    .search {
+        display: flex;
 
-        &:hover {
-            outline: 1px solid;
+        #search {
+            font-size: 18px;
+            background-color: rgb(220, 255, 201);
+            color: black;
+            opacity: 1;
+            margin: 5px;
+            border: 0;
+            margin-right: 0px;
+            flex-grow: 6;
+            height: 40px;
+
+            &:hover {
+                outline: 1px solid;
+            }
+
+            &:focus {
+                outline: 2px solid;
+            }
         }
 
-        &:focus {
-            outline: 2px solid;
+        .search_button {
+            flex-grow: 1;
+            background-color: rgb(75, 224, 125);
+            margin: 5px 0px;
+            padding: 0px 2px;
+            font-size: 18px;
+
+            &:hover {
+                background-color: rgb(36, 199, 36);
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 import "assets/pages/Home/recommendation.scss";
 
+// TODO - Fix jitter issue on card hover
+
 export function Recommendation({ url, title, width }: { url: string; title: string; width: string }) {
     return (
         <div className="recommendation">
