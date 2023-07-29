@@ -4,6 +4,8 @@
         "no-duplicate-selectors": true,
         "color-named": "always-where-possible",
         "selector-attribute-quotes": "always",
+        "declaration-property-value-no-unknown": true,
+        "unit-no-unknown": true,
         "rule-empty-line-before": null,
         "selector-class-pattern": null,
         "length-zero-no-unit": null,
