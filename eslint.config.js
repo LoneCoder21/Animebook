@@ -13,6 +13,7 @@ module.exports = [
             globals: {},
             parser: tsparser,
             parserOptions: {
+                sourceType: "module",
                 ecmaFeatures: { modules: true },
                 ecmaVersion: "latest"
             }
