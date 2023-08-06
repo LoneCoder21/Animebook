@@ -10,9 +10,10 @@ module.exports = [
         ...reactRecommended,
         languageOptions: {
             ...reactRecommended.languageOptions,
-            globals: {},
+            globals: { ...globals.browser },
             parser: tsparser,
             parserOptions: {
+                sourceType: "module",
                 ecmaFeatures: { modules: true },
                 ecmaVersion: "latest"
             }
