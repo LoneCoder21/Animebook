@@ -107,7 +107,7 @@ export default function Popular() {
             <OptionsForm data={data} setDataCallback={setData} />
             <div className="grid_container">
                 {animes.map((item) => {
-                    return <Recommendation key={item.title} {...item} width="83%" />;
+                    return <Recommendation key={item.title} {...item} width="100%" />;
                 })}
             </div>
         </div>
