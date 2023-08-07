@@ -1,7 +1,17 @@
-.recommendations {
-    height: 100vh;
-    overflow-y: scroll;
-    padding-bottom: 20px;
+.recommendation_container {
+    .recommendations {
+        height: 85vh;
+        overflow-y: scroll;
+        padding-bottom: 20px;
+    }
+
+    .recommendation_title {
+        color: black;
+        text-align: center;
+        margin: 10px;
+        font-size: 21px;
+        font-weight: 600;
+    }
 }
 
 .recommendation {
@@ -40,12 +50,4 @@
     &:first-child {
         margin-top: 0px;
     }
-}
-
-.recommendation_title {
-    color: black;
-    text-align: center;
-    margin: 10px;
-    font-size: 23px;
-    font-weight: 600;
 }

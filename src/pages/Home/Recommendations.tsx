@@ -24,7 +24,7 @@ export default function Recommendations() {
     ];
 
     return (
-        <div>
+        <div className="recommendation_container">
             <h2 className="recommendation_title">Recommendations</h2>
             <div className="recommendations">
                 {data.map((item) => {
