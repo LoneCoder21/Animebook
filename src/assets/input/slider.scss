@@ -4,24 +4,36 @@ input[type="range"] {
     outline: none;
     height: 8px;
     border-radius: 4px;
-}
-
-// TODO - fix browser specific styles with cross browser css styles
-
-input[type="range"]::-slider-thumb {
-    appearance: none;
-}
-
-input[type="range"]::-range-thumb,
-input[type="range"]::-slider-thumb {
-    border-radius: 50%;
     cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    appearance: none;
+    border-radius: 50%;
     width: 15px;
     height: 15px;
+    background: white;
+    border: 1px solid grey;
 }
 
-input[type="range"]::-webkit-progress-value {
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    background: white;
+    border: 1px solid grey;
+}
+
+input[type="range"]::-moz-range-progress {
     background-color: rgb(75 224 125);
     height: 8px;
     border-radius: 4px;
+}
+
+// TODO - Autoprefix sliders
+
+input[type="range"]::-webkit-progress-value {
+    appearance: none;
+    background: rgb(75 224 125);
 }
