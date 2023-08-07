@@ -30,10 +30,3 @@ input[type="range"]::-moz-range-progress {
     height: 8px;
     border-radius: 4px;
 }
-
-// TODO - Autoprefix sliders
-
-input[type="range"]::-webkit-progress-value {
-    appearance: none;
-    background: rgb(75 224 125);
-}
