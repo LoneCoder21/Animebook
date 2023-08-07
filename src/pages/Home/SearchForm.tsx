@@ -36,7 +36,7 @@ export default function SearchForm() {
             }}
         >
             <fieldset className="search">
-                <BsSearch />
+                <BsSearch className="icon" size={20} />
                 <input
                     id="search"
                     type="text"
