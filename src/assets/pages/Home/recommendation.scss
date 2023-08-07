@@ -1,6 +1,7 @@
 .recommendations {
     height: 100vh;
     overflow-y: scroll;
+    padding-bottom: 20px;
 }
 
 .recommendation {
@@ -12,11 +13,12 @@
     > img {
         box-sizing: border-box;
         height: auto;
+        border-radius: 10px;
+        border: 3px solid white;
 
         &:hover {
             cursor: pointer;
-            border-radius: 10px;
-            border: medium solid green;
+            border-color: rgb(36 199 36);
         }
     }
 
@@ -41,7 +43,7 @@
     }
 
     &:last-child {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
 }
 
