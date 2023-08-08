@@ -1,11 +1,11 @@
 header {
     background-color: rgb(76 196 60);
-    height: 50px;
     position: sticky;
+    padding: 5px 0px;
     top: 0;
     z-index: 1;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
 
     .link {
@@ -13,7 +13,7 @@ header {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        padding: 0 30px;
+        padding: 0 20px;
         color: black;
         font-weight: 600;
 
