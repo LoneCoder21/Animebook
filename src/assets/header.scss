@@ -1,21 +1,42 @@
 header {
     background-color: rgb(76 196 60);
     height: 50px;
-    display: flex;
-    justify-content: left;
-    align-items: center;
     position: sticky;
     top: 0;
     z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-    & > * {
+    .left {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        & > * {
+            padding: 0 30px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
         padding: 0 30px;
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
 
-        &:hover {
+        .icon {
+            color: black;
+        }
+
+        .icon:hover {
             color: white;
+            cursor: pointer;
         }
     }
 }
