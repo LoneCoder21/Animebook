@@ -8,35 +8,34 @@ header {
     flex-direction: row;
     justify-content: space-between;
 
-    .left {
+    .link {
         display: flex;
-        justify-content: left;
         align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 0 30px;
+        color: black;
+        font-weight: 600;
 
-        & > * {
-            padding: 0 30px;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
+        &:hover {
+            color: white;
+        }
 
-            &:hover {
-                color: white;
+        span {
+            margin-left: 10px;
+        }
+
+        .Jikan {
+            font-size: 17px;
+
+            &::first-letter {
+                font-size: 30px;
             }
         }
     }
 
+    .left,
     .right {
         display: flex;
-        align-items: center;
-        padding: 0 30px;
-
-        .icon {
-            color: black;
-        }
-
-        .icon:hover {
-            color: white;
-            cursor: pointer;
-        }
     }
 }
