@@ -1,6 +1,6 @@
 import Header from "components/header";
-import { Recommendation } from "pages/Home/Recommendations";
-import { useState, Dispatch } from "react";
+import { Recommendation, RecommendationInfo } from "pages/Home/Recommendations";
+import { useState, Dispatch, useEffect } from "react";
 import "assets/pages/Popular/popular.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
 
@@ -93,22 +93,60 @@ export function OptionsForm({
 // TODO - improve state logic
 
 export default function Popular() {
-    let [data, setData] = useState<OptionState[]>(createOptionState());
+    let [options, setOptions] = useState<OptionState[]>(createOptionState());
+    let [cards, setCards] = useState<RecommendationInfo[]>([]);
 
-    const animes = [{ url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }];
+    const mapped = options.map((item) => ({
+        [item.type]: item.option
+    }));
+    const obj = Object.assign({}, ...mapped);
+    // converts from array of objects to one object with all properties
 
-    for (let i = 0; i < 14; ++i) {
-        animes.push(animes[0]);
-    }
+    useEffect(() => {
+        fetch(
+            "https://api.jikan.moe/v4/top/anime?" +
+                new URLSearchParams({
+                    ...obj,
+                    sfw: "true"
+                })
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                let new_cards: RecommendationInfo[] = [];
+                const cards_size = Object.keys(data["data"]).length;
+
+                for (let i = 0; i < cards_size; ++i) {
+                    let json_info = data["data"][i];
+                    let info = {
+                        mal_id: json_info["mal_id"],
+                        title: json_info["title"],
+                        image: json_info["images"]["jpg"]["image_url"]
+                    } as RecommendationInfo;
+                    new_cards.push(info);
+                }
+
+                let unique_cards: RecommendationInfo[] = [];
+                let ids = new Set();
+
+                for (let i = 0; i < cards_size; ++i) {
+                    if (!ids.has(new_cards[i].mal_id)) {
+                        ids.add(new_cards[i].mal_id);
+                        unique_cards.push(new_cards[i]);
+                    }
+                }
+                // filter cards by mal id
+
+                setCards(unique_cards);
+            });
+    }, [options]);
 
     return (
         <div className="popular">
             <Header />
-            <OptionsForm data={data} setDataCallback={setData} />
+            <OptionsForm data={options} setDataCallback={setOptions} />
             <div className="grid_container">
-                {animes.map((item) => {
-                    return <div></div>;
-                    //return <Recommendation key={item.title} {...item} />;
+                {cards.map((item) => {
+                    return <Recommendation key={item.mal_id} info={item} />;
                 })}
             </div>
         </div>

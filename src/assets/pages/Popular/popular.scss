@@ -43,6 +43,13 @@
         > * {
             margin-top: 0px;
         }
+
+        .recommendation p {
+            width: 150px;
+            white-space: pre;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 
