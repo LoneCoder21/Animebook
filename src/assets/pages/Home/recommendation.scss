@@ -45,6 +45,12 @@
         &:hover {
             color: rgb(12 226 59);
         }
+
+        b {
+            white-space: pre;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     &:first-child {

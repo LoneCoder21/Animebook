@@ -1,34 +1,60 @@
 import "assets/pages/Home/recommendation.scss";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export function Recommendation({ url, title }: { url: string; title: string }) {
+type RecommendationInfo = {
+    mal_id: number;
+    title: string;
+    image: string;
+};
+
+export function Recommendation({ info }: { info: RecommendationInfo }) {
+    const navigate = useNavigate();
     return (
-        <div className="recommendation">
-            <img src={url} alt={title}></img>
+        <div
+            className="recommendation"
+            onClick={() => {
+                navigate(`/listing/${2}`, { replace: false });
+            }}
+        >
+            <img src={info.image} alt={info.title}></img>
             <button>
-                <b>{title}</b>
+                <b>{info.title}</b>
             </button>
         </div>
     );
 }
 
+// TODO - Handle fetch errors
+
 export default function Recommendations() {
-    const data = [
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" },
-        { url: "https://cdn.myanimelist.net/images/anime/1976/123710.jpg", title: "Shine post" }
-    ];
+    let [cards, setCards] = useState<RecommendationInfo[]>([]);
+    const max_cards = 30;
+
+    useEffect(() => {
+        fetch("https://api.jikan.moe/v4/recommendations/anime")
+            .then((response) => response.json())
+            .then((data) => {
+                let new_cards: RecommendationInfo[] = [];
+                for (let i = 0; i < max_cards; ++i) {
+                    let json_info = data["data"][i]["entry"][0];
+                    let info = {
+                        mal_id: json_info["mal_id"],
+                        title: json_info["title"],
+                        image: json_info["images"]["jpg"]["image_url"]
+                    } as RecommendationInfo;
+                    new_cards.push(info);
+                }
+                setCards(new_cards);
+            });
+    }, []);
 
     return (
         <div className="recommendation_container">
             <h2 className="recommendation_title">Recommendations</h2>
             <div className="recommendations">
-                {data.map((item) => {
-                    return <Recommendation key={item.title} {...item} />;
+                {cards.map((item) => {
+                    return <Recommendation key={item.mal_id} info={item} />;
                 })}
             </div>
         </div>
