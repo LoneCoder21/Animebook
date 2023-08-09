@@ -10,17 +10,23 @@ type RecommendationInfo = {
 
 export function Recommendation({ info }: { info: RecommendationInfo }) {
     const navigate = useNavigate();
+
     return (
-        <div
-            className="recommendation"
-            onClick={() => {
-                navigate(`/listing/${2}`, { replace: false });
-            }}
-        >
-            <img src={info.image} alt={info.title}></img>
-            <button>
-                <b>{info.title}</b>
-            </button>
+        <div className="recommendation">
+            <img
+                src={info.image}
+                alt={info.title}
+                onClick={() => {
+                    navigate(`/listing/${info.mal_id}`, { replace: false });
+                }}
+            ></img>
+            <p
+                onClick={() => {
+                    navigate(`/listing/${info.mal_id}`, { replace: false });
+                }}
+            >
+                {info.title}
+            </p>
         </div>
     );
 }
