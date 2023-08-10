@@ -2,7 +2,9 @@ import Header from "components/header";
 import { Recommendation, RecommendationInfo } from "pages/Home/Recommendations";
 import { useState, Dispatch, useEffect } from "react";
 import { BiSad } from "react-icons/bi";
+import { RotatingLines } from "react-loader-spinner";
 import "assets/pages/Popular/popular.scss";
+import "assets/spinner.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
 
 const query_options = [
@@ -146,6 +148,15 @@ export default function Popular() {
             <Header />
             <OptionsForm data={options} setDataCallback={setOptions} />
             <div className="grid_container">
+                {cards == null && (
+                    <RotatingLines
+                        strokeColor="black"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        width="96"
+                        visible={true}
+                    />
+                )}
                 {cards?.map((item) => {
                     return <Recommendation key={item.mal_id} info={item} />;
                 })}

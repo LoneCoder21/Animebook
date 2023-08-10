@@ -1,6 +1,8 @@
 import "assets/pages/Home/recommendation.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RotatingLines } from "react-loader-spinner";
+import "assets/spinner.scss";
 
 export type RecommendationInfo = {
     mal_id: number;
@@ -34,7 +36,7 @@ export function Recommendation({ info }: { info: RecommendationInfo }) {
 // TODO - Handle fetch errors
 
 export default function Recommendations() {
-    let [cards, setCards] = useState<RecommendationInfo[]>([]);
+    let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/recommendations/anime")
@@ -72,7 +74,18 @@ export default function Recommendations() {
         <div className="recommendation_container">
             <h2 className="recommendation_title">Recommendations</h2>
             <div className="recommendations">
-                {cards.map((item) => {
+                {cards == null && (
+                    <div className="spinner">
+                        <RotatingLines
+                            strokeColor="black"
+                            strokeWidth="5"
+                            animationDuration="0.75"
+                            width="96"
+                            visible={true}
+                        />
+                    </div>
+                )}
+                {cards?.map((item) => {
                     return <Recommendation key={item.mal_id} info={item} />;
                 })}
             </div>
