@@ -5,11 +5,13 @@ export default function RadioButtonHorizontal({
     className = "",
     options,
     checked,
+    disabled = false,
     setChosenCallback
 }: {
     type: string;
     className: string;
     options: string[];
+    disabled?: boolean;
     checked: string;
     setChosenCallback: (value: string) => void;
 }) {
@@ -31,6 +33,7 @@ export default function RadioButtonHorizontal({
                                 value={item}
                                 name={type}
                                 checked={checked === item}
+                                disabled={disabled}
                                 onChange={() => {}}
                             />
                             <label htmlFor={`${type}-${item}`}>{item}</label>
