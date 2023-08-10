@@ -37,6 +37,7 @@ export function Recommendation({ info }: { info: RecommendationInfo }) {
 
 export default function Recommendations() {
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
+    let [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/recommendations/anime")
@@ -67,6 +68,7 @@ export default function Recommendations() {
                 // filter cards by mal id
 
                 setCards(unique_cards);
+                setLoading(false);
             });
     }, []);
 
@@ -74,7 +76,7 @@ export default function Recommendations() {
         <div className="recommendation_container">
             <h2 className="recommendation_title">Recommendations</h2>
             <div className="recommendations">
-                {cards == null && (
+                {loading && (
                     <div className="spinner">
                         <RotatingLines
                             strokeColor="black"

@@ -98,8 +98,15 @@ export function OptionsForm({
 export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
+    let [loading, setLoading] = useState(true);
 
     // converts from array of objects to one object with all properties
+
+    let loadOptions = (e: OptionState[]) => {
+        setLoading(true);
+        setCards(null);
+        setOptions(e);
+    };
 
     useEffect(() => {
         const mapped = options.map((item) => ({
@@ -116,7 +123,7 @@ export default function Popular() {
             .then((response) => response.json())
             .then((data) => {
                 let new_cards: RecommendationInfo[] = [];
-                const cards_size = data["pagination"]["items"]["count"] as number;
+                const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
                     let json_info = data["data"][i];
@@ -140,22 +147,25 @@ export default function Popular() {
                 // filter cards by mal id
 
                 setCards(unique_cards);
+                setLoading(false);
             });
     }, [options]);
 
     return (
         <div className="popular">
             <Header />
-            <OptionsForm data={options} setDataCallback={setOptions} />
+            <OptionsForm data={options} setDataCallback={loadOptions} />
             <div className="grid_container">
-                {cards == null && (
-                    <RotatingLines
-                        strokeColor="black"
-                        strokeWidth="5"
-                        animationDuration="0.75"
-                        width="96"
-                        visible={true}
-                    />
+                {loading && (
+                    <div className="spinner">
+                        <RotatingLines
+                            strokeColor="black"
+                            strokeWidth="5"
+                            animationDuration="0.75"
+                            width="96"
+                            visible={true}
+                        />
+                    </div>
                 )}
                 {cards?.map((item) => {
                     return <Recommendation key={item.mal_id} info={item} />;
