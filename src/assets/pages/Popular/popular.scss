@@ -42,6 +42,27 @@
 
         > * {
             margin-top: 0px;
+            align-self: end;
+            justify-self: center;
+        }
+
+        .recommendation p {
+            width: 150px;
+            white-space: pre;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .message {
+            margin-top: 0;
+            font-size: 23px;
+            font-weight: bold;
         }
     }
 }
