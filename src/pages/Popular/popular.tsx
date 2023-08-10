@@ -1,6 +1,7 @@
 import Header from "components/header";
 import { Recommendation, RecommendationInfo } from "pages/Home/Recommendations";
 import { useState, Dispatch, useEffect } from "react";
+import { BiSad } from "react-icons/bi";
 import "assets/pages/Popular/popular.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
 
@@ -94,15 +95,15 @@ export function OptionsForm({
 
 export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
-    let [cards, setCards] = useState<RecommendationInfo[]>([]);
+    let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
 
-    const mapped = options.map((item) => ({
-        [item.type]: item.option
-    }));
-    const obj = Object.assign({}, ...mapped);
     // converts from array of objects to one object with all properties
 
     useEffect(() => {
+        const mapped = options.map((item) => ({
+            [item.type]: item.option
+        }));
+        const obj = Object.assign({}, ...mapped);
         fetch(
             "https://api.jikan.moe/v4/top/anime?" +
                 new URLSearchParams({
@@ -113,7 +114,7 @@ export default function Popular() {
             .then((response) => response.json())
             .then((data) => {
                 let new_cards: RecommendationInfo[] = [];
-                const cards_size = Object.keys(data["data"]).length;
+                const cards_size = data["pagination"]["items"]["count"] as number;
 
                 for (let i = 0; i < cards_size; ++i) {
                     let json_info = data["data"][i];
@@ -145,9 +146,15 @@ export default function Popular() {
             <Header />
             <OptionsForm data={options} setDataCallback={setOptions} />
             <div className="grid_container">
-                {cards.map((item) => {
+                {cards?.map((item) => {
                     return <Recommendation key={item.mal_id} info={item} />;
                 })}
+                {cards?.length === 0 && (
+                    <div className="empty">
+                        <BiSad size={50} className="icon" />
+                        <p className="message">Nothing found!</p>
+                    </div>
+                )}
             </div>
         </div>
     );
