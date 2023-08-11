@@ -1,11 +1,11 @@
 import Header from "components/header";
-import { Recommendation, RecommendationInfo } from "pages/Home/Recommendations";
+import { RecommendationInfo } from "pages/Home/Recommendations";
 import { useState, Dispatch, useEffect } from "react";
-import { BiSad } from "react-icons/bi";
-import { RotatingLines } from "react-loader-spinner";
 import "assets/pages/Popular/popular.scss";
+import "assets/grid.scss";
 import "assets/spinner.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
+import Animegrid from "components/grid";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -105,7 +105,7 @@ export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
-    let [disable, setDisable] = useState(false);
+    let [disable, setDisable] = useState(true);
 
     // converts from array of objects to one object with all properties
 
@@ -172,28 +172,7 @@ export default function Popular() {
         <div className="popular">
             <Header />
             <OptionsForm data={options} setDataCallback={loadOptions} disabled={disable} />
-            <div className="grid_container">
-                {loading && (
-                    <div className="spinner">
-                        <RotatingLines
-                            strokeColor="black"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="96"
-                            visible={true}
-                        />
-                    </div>
-                )}
-                {cards?.map((item) => {
-                    return <Recommendation key={item.mal_id} info={item} />;
-                })}
-                {cards?.length === 0 && (
-                    <div className="empty">
-                        <BiSad size={50} className="icon" />
-                        <p className="message">Nothing found!</p>
-                    </div>
-                )}
-            </div>
+            <Animegrid loading={loading} cards={cards} />
         </div>
     );
 }
