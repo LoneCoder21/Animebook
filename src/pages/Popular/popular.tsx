@@ -105,7 +105,7 @@ export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
-    let [disable, setDisable] = useState(true);
+    let [disable, setDisable] = useState(false);
 
     // converts from array of objects to one object with all properties
 
@@ -113,7 +113,16 @@ export default function Popular() {
         setLoading(true);
         setCards(null);
         setOptions(e);
+        setDisable(true);
     };
+
+    useEffect(() => {
+        if (!disable) return;
+        const timer = setTimeout(() => {
+            setDisable(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [disable]);
 
     useEffect(() => {
         const mapped = options.map((item) => ({
