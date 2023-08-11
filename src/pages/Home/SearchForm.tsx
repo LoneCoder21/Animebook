@@ -15,9 +15,29 @@ function NamedComponent({ type, children }: { type: string; children: JSX.Elemen
     );
 }
 
+export type SearchFormData = {
+    search: string;
+    score: number;
+    type: string;
+    status: string;
+    order: string;
+    sort: string;
+    date: string;
+};
+
 export default function SearchForm() {
     const datenow = new Date();
     const DateToday = datenow.toLocaleDateString("en-CA");
+
+    let [form, setForm] = useState<SearchFormData>({
+        search: "",
+        score: 10,
+        type: "tv",
+        status: "airing",
+        order: "mal_id",
+        sort: "descending",
+        date: DateToday
+    });
 
     let [search, setSearch] = useState("");
     let [score, setScore] = useState(10);
@@ -26,6 +46,7 @@ export default function SearchForm() {
     let [order, setOrder] = useState("mal_id");
     let [sort, setSort] = useState("descending");
     let [date, setDate] = useState(DateToday);
+
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {
@@ -56,11 +77,7 @@ export default function SearchForm() {
                         setSearch(e.target.value);
                     }}
                 />
-                <button
-                    className={"search_button" + " " + (disable ? "disabled" : "")}
-                    type="submit"
-                    disabled={disable}
-                >
+                <button className={"search_button " + (disable ? "disabled" : "")} type="submit" disabled={disable}>
                     Search
                 </button>
             </fieldset>
