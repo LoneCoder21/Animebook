@@ -39,14 +39,6 @@ export default function SearchForm() {
         date: DateToday
     });
 
-    let [search, setSearch] = useState("");
-    let [score, setScore] = useState(10);
-    let [type, setType] = useState("tv");
-    let [status, setStatus] = useState("airing");
-    let [order, setOrder] = useState("mal_id");
-    let [sort, setSort] = useState("descending");
-    let [date, setDate] = useState(DateToday);
-
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {
@@ -72,9 +64,9 @@ export default function SearchForm() {
                     id="search"
                     type="text"
                     placeholder="Search anime"
-                    value={search}
+                    value={form.search}
                     onChange={(e) => {
-                        setSearch(e.target.value);
+                        setForm({ ...form, search: e.target.value });
                     }}
                 />
                 <button className={"search_button " + (disable ? "disabled" : "")} type="submit" disabled={disable}>
@@ -88,9 +80,9 @@ export default function SearchForm() {
                     max="10"
                     className="slider"
                     id="score"
-                    value={score}
+                    value={form.score}
                     onChange={(e) => {
-                        setScore(parseInt(e.target.value));
+                        setForm({ ...form, score: parseInt(e.target.value) });
                     }}
                 ></input>
             </NamedComponent>
@@ -99,8 +91,10 @@ export default function SearchForm() {
                     type="type"
                     className="form_radio_button"
                     options={["tv", "movie", "ova", "special", "ona", "music"]}
-                    checked={type}
-                    setChosenCallback={setType}
+                    checked={form.type}
+                    setChosenCallback={(type) => {
+                        setForm({ ...form, type: type });
+                    }}
                 />
             </NamedComponent>
             <NamedComponent type="status">
@@ -108,8 +102,10 @@ export default function SearchForm() {
                     type="status"
                     className="form_radio_button"
                     options={["airing", "complete", "upcoming"]}
-                    checked={status}
-                    setChosenCallback={setStatus}
+                    checked={form.status}
+                    setChosenCallback={(status) => {
+                        setForm({ ...form, status: status });
+                    }}
                 />
             </NamedComponent>
             <NamedComponent type="Order By">
@@ -129,8 +125,10 @@ export default function SearchForm() {
                         "members",
                         "favorites"
                     ]}
-                    checked={order}
-                    setChosenCallback={setOrder}
+                    checked={form.order}
+                    setChosenCallback={(order) => {
+                        setForm({ ...form, order: order });
+                    }}
                 />
             </NamedComponent>
             <NamedComponent type="sort">
@@ -138,17 +136,19 @@ export default function SearchForm() {
                     type="sort"
                     className="form_radio_button"
                     options={["descending", "ascending"]}
-                    checked={sort}
-                    setChosenCallback={setSort}
+                    checked={form.sort}
+                    setChosenCallback={(sort) => {
+                        setForm({ ...form, sort: sort });
+                    }}
                 />
             </NamedComponent>
             <NamedComponent type="Max Date">
                 <input
                     type="date"
                     id="startdate"
-                    value={date}
+                    value={form.date}
                     onChange={(e) => {
-                        setDate(e.target.value);
+                        setForm({ ...form, date: e.target.value });
                     }}
                 ></input>
             </NamedComponent>
