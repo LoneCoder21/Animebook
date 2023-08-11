@@ -2,7 +2,7 @@ import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
 import "assets/input/date.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
 
@@ -26,6 +26,15 @@ export default function SearchForm() {
     let [order, setOrder] = useState("mal_id");
     let [sort, setSort] = useState("descending");
     let [date, setDate] = useState(DateToday);
+    let [disable, setDisable] = useState(false);
+
+    useEffect(() => {
+        if (!disable) return;
+        const timer = setTimeout(() => {
+            setDisable(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [disable]);
 
     return (
         <form
@@ -33,6 +42,7 @@ export default function SearchForm() {
             onSubmit={(e) => {
                 console.log("submitting");
                 e.preventDefault();
+                setDisable(true);
             }}
         >
             <fieldset className="search">
@@ -46,7 +56,11 @@ export default function SearchForm() {
                         setSearch(e.target.value);
                     }}
                 />
-                <button className="search_button" type="submit">
+                <button
+                    className={"search_button" + " " + (disable ? "disabled" : "")}
+                    type="submit"
+                    disabled={disable}
+                >
                     Search
                 </button>
             </fieldset>
