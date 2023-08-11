@@ -24,6 +24,7 @@ export default function RadioButtonHorizontal({
                             type="button"
                             className={(checked === item ? "selected" : "") + " " + (disabled ? "disabled" : "")}
                             onClick={() => {
+                                if (checked === item) return;
                                 if (!disabled) setChosenCallback(item);
                             }}
                         >
