@@ -69,7 +69,8 @@ export default function Recommendations() {
 
                 setCards(unique_cards);
                 setLoading(false);
-            });
+            })
+            .catch((error) => {});
     }, []);
 
     return (

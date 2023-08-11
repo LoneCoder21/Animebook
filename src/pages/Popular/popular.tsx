@@ -164,7 +164,8 @@ export default function Popular() {
 
                 setCards(unique_cards);
                 setLoading(false);
-            });
+            })
+            .catch((error) => {});
     }, [options]);
 
     return (
