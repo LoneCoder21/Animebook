@@ -29,11 +29,13 @@ export function Option({
     options,
     data,
     fullData,
+    disabled,
     setDataCallback
 }: {
     type: string;
     option_index: number;
     options: string[];
+    disabled: boolean;
     data: OptionState;
     fullData: OptionState[];
     setDataCallback: Dispatch<OptionState[]>;
@@ -52,6 +54,7 @@ export function Option({
                 className="popular_radio_button"
                 options={options}
                 checked={data.option}
+                disabled={disabled}
                 setChosenCallback={(value: string) => {
                     newfullData[option_index].option = value;
                     setDataCallback(newfullData);
@@ -63,9 +66,11 @@ export function Option({
 
 export function OptionsForm({
     data,
+    disabled,
     setDataCallback
 }: {
     data: OptionState[];
+    disabled: boolean;
     setDataCallback: Dispatch<OptionState[]>;
 }) {
     return (
@@ -83,6 +88,7 @@ export function OptionsForm({
                             {...item}
                             fullData={data}
                             data={data[index]}
+                            disabled={disabled}
                             setDataCallback={setDataCallback}
                             option_index={index}
                         />
@@ -99,6 +105,7 @@ export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
+    let [disable, setDisable] = useState(true);
 
     // converts from array of objects to one object with all properties
 
@@ -154,7 +161,7 @@ export default function Popular() {
     return (
         <div className="popular">
             <Header />
-            <OptionsForm data={options} setDataCallback={loadOptions} />
+            <OptionsForm data={options} setDataCallback={loadOptions} disabled={disable} />
             <div className="grid_container">
                 {loading && (
                     <div className="spinner">

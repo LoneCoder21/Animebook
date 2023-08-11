@@ -22,9 +22,9 @@ export default function RadioButtonHorizontal({
                     <Fragment key={item}>
                         <button
                             type="button"
-                            className={checked === item ? "selected" : ""}
+                            className={(checked === item ? "selected" : "") + " " + (disabled ? "disabled" : "")}
                             onClick={() => {
-                                setChosenCallback(item);
+                                if (!disabled) setChosenCallback(item);
                             }}
                         >
                             <input
