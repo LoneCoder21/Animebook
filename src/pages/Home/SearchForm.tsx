@@ -1,8 +1,7 @@
 import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
-import "assets/input/date.scss";
 import RadioButtonHorizontal from "components/input/RadioButton";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
 
@@ -16,29 +15,15 @@ function NamedComponent({ type, children }: { type: string; children: JSX.Elemen
 }
 
 export type SearchFormData = {
-    search: string;
-    score: number;
+    q: string;
+    max_score: string;
     type: string;
     status: string;
-    order: string;
+    order_by: string;
     sort: string;
-    date: string;
 };
 
-export default function SearchForm() {
-    const datenow = new Date();
-    const DateToday = datenow.toLocaleDateString("en-CA");
-
-    let [form, setForm] = useState<SearchFormData>({
-        search: "",
-        score: 10,
-        type: "tv",
-        status: "airing",
-        order: "mal_id",
-        sort: "descending",
-        date: DateToday
-    });
-
+export default function SearchForm({ form, setForm }: { form: SearchFormData; setForm: Dispatch<SearchFormData> }) {
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {
@@ -64,9 +49,9 @@ export default function SearchForm() {
                     id="search"
                     type="text"
                     placeholder="Search anime"
-                    value={form.search}
+                    value={form.q}
                     onChange={(e) => {
-                        setForm({ ...form, search: e.target.value });
+                        setForm({ ...form, q: e.target.value });
                     }}
                 />
                 <button className={"search_button " + (disable ? "disabled" : "")} type="submit" disabled={disable}>
@@ -80,9 +65,9 @@ export default function SearchForm() {
                     max="10"
                     className="slider"
                     id="score"
-                    value={form.score}
+                    value={form.max_score}
                     onChange={(e) => {
-                        setForm({ ...form, score: parseInt(e.target.value) });
+                        setForm({ ...form, max_score: e.target.value });
                     }}
                 ></input>
             </NamedComponent>
@@ -125,9 +110,9 @@ export default function SearchForm() {
                         "members",
                         "favorites"
                     ]}
-                    checked={form.order}
+                    checked={form.order_by}
                     setChosenCallback={(order) => {
-                        setForm({ ...form, order: order });
+                        setForm({ ...form, order_by: order });
                     }}
                 />
             </NamedComponent>
@@ -136,21 +121,12 @@ export default function SearchForm() {
                     type="sort"
                     className="form_radio_button"
                     options={["descending", "ascending"]}
-                    checked={form.sort}
+                    checked={form.sort === "desc" ? "descending" : "ascending"}
                     setChosenCallback={(sort) => {
-                        setForm({ ...form, sort: sort });
+                        let sorttype = sort === "descending" ? "desc" : "asc";
+                        setForm({ ...form, sort: sorttype });
                     }}
                 />
-            </NamedComponent>
-            <NamedComponent type="Max Date">
-                <input
-                    type="date"
-                    id="startdate"
-                    value={form.date}
-                    onChange={(e) => {
-                        setForm({ ...form, date: e.target.value });
-                    }}
-                ></input>
             </NamedComponent>
         </form>
     );
