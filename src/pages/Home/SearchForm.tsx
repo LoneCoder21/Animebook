@@ -1,6 +1,6 @@
 import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
-import RadioButtonHorizontal from "components/input/RadioButton";
+import RadioButton from "components/input/RadioButton";
 import { Dispatch, useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
@@ -85,29 +85,31 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                 ></input>
             </NamedComponent>
             <NamedComponent type="type">
-                <RadioButtonHorizontal
+                <RadioButton
                     type="type"
                     className="form_radio_button"
                     options={["tv", "movie", "ova", "special", "ona", "music"]}
                     checked={form.type}
+                    isVertical={true}
                     setChosenCallback={(type) => {
                         setForm({ ...form, type: type });
                     }}
                 />
             </NamedComponent>
             <NamedComponent type="status">
-                <RadioButtonHorizontal
+                <RadioButton
                     type="status"
                     className="form_radio_button"
                     options={["complete", "airing", "upcoming"]}
                     checked={form.status}
+                    isVertical={true}
                     setChosenCallback={(status) => {
                         setForm({ ...form, status: status });
                     }}
                 />
             </NamedComponent>
             <NamedComponent type="Order By">
-                <RadioButtonHorizontal
+                <RadioButton
                     type="orderby"
                     className="form_radio_button"
                     options={[
@@ -124,17 +126,19 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         "favorites"
                     ]}
                     checked={form.order_by}
+                    isVertical={true}
                     setChosenCallback={(order) => {
                         setForm({ ...form, order_by: order });
                     }}
                 />
             </NamedComponent>
             <NamedComponent type="sort">
-                <RadioButtonHorizontal
+                <RadioButton
                     type="sort"
                     className="form_radio_button"
                     options={["descending", "ascending"]}
                     checked={form.sort === "desc" ? "descending" : "ascending"}
+                    isVertical={true}
                     setChosenCallback={(sort) => {
                         let sorttype = sort === "descending" ? "desc" : "asc";
                         setForm({ ...form, sort: sorttype });

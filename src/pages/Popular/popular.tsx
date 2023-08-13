@@ -4,7 +4,7 @@ import { useState, Dispatch, useEffect } from "react";
 import "assets/pages/Popular/popular.scss";
 import "assets/grid.scss";
 import "assets/spinner.scss";
-import RadioButtonHorizontal from "components/input/RadioButton";
+import RadioButton from "components/input/RadioButton";
 import Animegrid from "components/grid";
 
 const query_options = [
@@ -49,7 +49,7 @@ export function Option({
     return (
         <fieldset>
             <p>{type}</p>
-            <RadioButtonHorizontal
+            <RadioButton
                 type={type}
                 className="popular_radio_button"
                 options={options}

@@ -16,6 +16,10 @@
         padding: 5px 8px;
         border-radius: 15px;
 
+        &.vertical {
+            display: block;
+        }
+
         &.selected {
             background-color: $buttoncolor;
         }

@@ -1,10 +1,11 @@
 import { Fragment } from "react";
 
-export default function RadioButtonHorizontal({
+export default function RadioButton({
     type,
     className = "",
     options,
     checked,
+    isVertical,
     disabled = false,
     setChosenCallback
 }: {
@@ -12,6 +13,7 @@ export default function RadioButtonHorizontal({
     className: string;
     options: string[];
     disabled?: boolean;
+    isVertical?: boolean;
     checked: string;
     setChosenCallback: (value: string) => void;
 }) {
@@ -22,7 +24,12 @@ export default function RadioButtonHorizontal({
                     <Fragment key={item}>
                         <button
                             type="button"
-                            className={(checked === item ? "selected" : "") + " " + (disabled ? "disabled" : "")}
+                            className={
+                                (checked === item ? "selected" : "") +
+                                " " +
+                                (disabled ? "disabled " : "") +
+                                (isVertical && "vertical")
+                            }
                             onClick={() => {
                                 if (checked === item) return;
                                 if (!disabled) setChosenCallback(item);
