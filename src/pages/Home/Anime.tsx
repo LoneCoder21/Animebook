@@ -1,22 +1,20 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/grid";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RecommendationInfo } from "./Recommendations";
 import { SearchFormData } from "./SearchForm";
 
-export default function Anime({
-    form,
-    loading,
-    setLoading
-}: {
-    form: SearchFormData;
-    loading: boolean;
-    setLoading: Dispatch<boolean>;
-}) {
-    let formdata = new URLSearchParams({ ...form, sfw: "true" }).toString();
+export default function Anime({ form }: { form: SearchFormData }) {
+    let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
-    console.log("https://api.jikan.moe/v4/anime?" + formdata);
+    let [loading, setLoading] = useState(true);
+
     useEffect(() => {
+        setLoading(true);
+    }, [form]);
+
+    useEffect(() => {
+        if (!loading) return;
         fetch("https://api.jikan.moe/v4/anime?" + formdata)
             .then((response) => response.json())
             .then((data) => {
@@ -48,7 +46,7 @@ export default function Anime({
                 setLoading(false);
             })
             .catch((error) => {});
-    }, [formdata]);
+    }, [loading]);
 
     return (
         <div className="anime">

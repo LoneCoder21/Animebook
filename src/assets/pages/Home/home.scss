@@ -1,4 +1,16 @@
 .home {
     display: flex;
     justify-content: center;
+    margin: 5px;
+
+    .searchform {
+        flex: 1;
+        margin: 0px;
+        margin-right: 5px;
+    }
+
+    .anime {
+        flex: 20;
+        padding: 0 5px;
+    }
 }

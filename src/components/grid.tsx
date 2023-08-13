@@ -17,10 +17,11 @@ export default function Animegrid({ loading, cards }: { loading: boolean; cards:
                     />
                 </div>
             )}
-            {cards?.map((item) => {
-                return <Recommendation key={item.mal_id} info={item} />;
-            })}
-            {cards?.length === 0 && (
+            {!loading &&
+                cards?.map((item) => {
+                    return <Recommendation key={item.mal_id} info={item} />;
+                })}
+            {!loading && cards?.length === 0 && (
                 <div className="empty">
                     <BiSad size={50} className="icon" />
                     <p className="message">Nothing found!</p>

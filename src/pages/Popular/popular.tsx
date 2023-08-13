@@ -111,7 +111,6 @@ export default function Popular() {
 
     let loadOptions = (e: OptionState[]) => {
         setLoading(true);
-        setCards(null);
         setOptions(e);
         setDisable(true);
     };

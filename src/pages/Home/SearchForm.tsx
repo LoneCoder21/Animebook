@@ -21,9 +21,22 @@ export type SearchFormData = {
     status: string;
     order_by: string;
     sort: string;
+    sfw: string;
 };
 
-export default function SearchForm({ form, setForm }: { form: SearchFormData; setForm: Dispatch<SearchFormData> }) {
+export const defaultFormData = {
+    q: "",
+    max_score: "10",
+    type: "tv",
+    status: "complete",
+    order_by: "mal_id",
+    sort: "desc",
+    sfw: "true"
+};
+
+export default function SearchForm({ updateForm }: { updateForm: Dispatch<SearchFormData> }) {
+    let [form, setForm] = useState<SearchFormData>(defaultFormData);
+
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {
@@ -38,9 +51,9 @@ export default function SearchForm({ form, setForm }: { form: SearchFormData; se
         <form
             className="searchform"
             onSubmit={(e) => {
-                console.log("submitting");
                 e.preventDefault();
                 setDisable(true);
+                updateForm(form);
             }}
         >
             <fieldset className="search">
@@ -86,7 +99,7 @@ export default function SearchForm({ form, setForm }: { form: SearchFormData; se
                 <RadioButtonHorizontal
                     type="status"
                     className="form_radio_button"
-                    options={["airing", "complete", "upcoming"]}
+                    options={["complete", "airing", "upcoming"]}
                     checked={form.status}
                     setChosenCallback={(status) => {
                         setForm({ ...form, status: status });
