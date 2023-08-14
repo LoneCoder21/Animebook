@@ -25,10 +25,9 @@ export default function RadioButton({
                         <button
                             type="button"
                             className={
-                                (checked === item ? "selected" : "") +
-                                " " +
-                                (disabled ? "disabled " : "") +
-                                (isVertical && "vertical")
+                                (checked === item ? "selected " : " ") +
+                                (disabled ? "disabled " : " ") +
+                                (isVertical ? "vertical " : " ")
                             }
                             onClick={() => {
                                 if (checked === item) return;

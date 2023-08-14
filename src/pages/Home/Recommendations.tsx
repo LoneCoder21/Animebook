@@ -1,8 +1,7 @@
 import "assets/pages/Home/recommendation.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RotatingLines } from "react-loader-spinner";
-import "assets/spinner.scss";
+import Spinner from "components/loaders/spinner";
 
 export type RecommendationInfo = {
     mal_id: number;
@@ -77,17 +76,7 @@ export default function Recommendations() {
         <div className="recommendation_container">
             <h2 className="recommendation_title">Recommendations</h2>
             <div className="recommendations">
-                {loading && (
-                    <div className="spinner">
-                        <RotatingLines
-                            strokeColor="black"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="96"
-                            visible={true}
-                        />
-                    </div>
-                )}
+                {loading && <Spinner />}
                 {cards?.map((item) => {
                     return <Recommendation key={item.mal_id} info={item} />;
                 })}

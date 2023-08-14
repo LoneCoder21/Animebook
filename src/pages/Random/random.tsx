@@ -1,8 +1,7 @@
 import Header from "components/header";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import "assets/spinner.scss";
+import Spinner from "components/loaders/spinner";
 
 export default function Random() {
     const navigate = useNavigate();
@@ -19,9 +18,7 @@ export default function Random() {
     return (
         <>
             <Header />
-            <div className="spinner">
-                <RotatingLines strokeColor="black" strokeWidth="5" animationDuration="0.75" width="96" visible={true} />
-            </div>
+            <Spinner />
         </>
     );
 }

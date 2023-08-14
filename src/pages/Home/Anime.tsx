@@ -1,5 +1,5 @@
 import "assets/pages/Home/anime.scss";
-import Animegrid from "components/grid";
+import Animegrid from "components/animegrid";
 import { useEffect, useState } from "react";
 import { RecommendationInfo } from "./Recommendations";
 import { SearchFormData } from "./SearchForm";

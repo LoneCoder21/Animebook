@@ -5,7 +5,7 @@ import "assets/pages/Popular/popular.scss";
 import "assets/grid.scss";
 import "assets/spinner.scss";
 import RadioButton from "components/input/RadioButton";
-import Animegrid from "components/grid";
+import Animegrid from "components/animegrid";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
