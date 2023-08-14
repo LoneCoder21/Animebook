@@ -8,8 +8,8 @@ export default function Animegrid({ loading, cards }: { loading: boolean; cards:
         <div className="grid_container">
             {loading && <Spinner />}
             {!loading &&
-                cards?.map((item) => {
-                    return <Card key={item.mal_id} info={item} />;
+                cards?.map((item, index) => {
+                    return <Card key={index} info={item} />;
                 })}
             {!loading && cards?.length === 0 && <Empty />}
         </div>
