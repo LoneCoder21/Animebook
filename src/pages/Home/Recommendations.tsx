@@ -1,48 +1,18 @@
-import "assets/pages/Home/recommendation.scss";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Spinner from "components/loaders/spinner";
-
-export type RecommendationInfo = {
-    mal_id: number;
-    title: string;
-    image: string;
-};
-
-export function Recommendation({ info }: { info: RecommendationInfo }) {
-    const navigate = useNavigate();
-
-    return (
-        <div className="recommendation">
-            <img
-                src={info.image}
-                alt={info.title}
-                onClick={() => {
-                    navigate(`/listing/${info.mal_id}`, { replace: false });
-                }}
-            ></img>
-            <p
-                onClick={() => {
-                    navigate(`/listing/${info.mal_id}`, { replace: false });
-                }}
-            >
-                {info.title}
-            </p>
-        </div>
-    );
-}
-
 // TODO - Handle fetch errors
 
+import { Card, CardInfo } from "components/Card";
+import Spinner from "components/loaders/spinner";
+import { useEffect, useState } from "react";
+
 export default function Recommendations() {
-    let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
+    let [cards, setCards] = useState<CardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/recommendations/anime")
             .then((response) => response.json())
             .then((data) => {
-                let new_cards: RecommendationInfo[] = [];
+                let new_cards: CardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
@@ -51,12 +21,12 @@ export default function Recommendations() {
                         mal_id: json_info["mal_id"],
                         title: json_info["title"],
                         image: json_info["images"]["jpg"]["image_url"]
-                    } as RecommendationInfo;
+                    } as CardInfo;
 
                     new_cards.push(info);
                 }
 
-                let unique_cards: RecommendationInfo[] = [];
+                let unique_cards: CardInfo[] = [];
                 let ids = new Set();
                 for (let i = 0; i < cards_size; ++i) {
                     if (!ids.has(new_cards[i].mal_id)) {
@@ -78,7 +48,7 @@ export default function Recommendations() {
             <div className="recommendations">
                 {loading && <Spinner />}
                 {cards?.map((item) => {
-                    return <Recommendation key={item.mal_id} info={item} />;
+                    return <Card key={item.mal_id} info={item} />;
                 })}
             </div>
         </div>
