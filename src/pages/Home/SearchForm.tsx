@@ -5,16 +5,7 @@ import { Dispatch, useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
 
-function NamedComponent({ type, children }: { type: string; children: JSX.Element }) {
-    return (
-        <div className="name">
-            <span>{type}</span>
-            {children}
-        </div>
-    );
-}
-
-export type SearchFormData = {
+export type searchFormData = {
     q: string;
     max_score: string;
     type: string;
@@ -34,8 +25,17 @@ export const defaultFormData = {
     sfw: "true"
 };
 
-export default function SearchForm({ updateForm }: { updateForm: Dispatch<SearchFormData> }) {
-    let [form, setForm] = useState<SearchFormData>(defaultFormData);
+function LabelContainer({ type, children }: { type: string; children: JSX.Element }) {
+    return (
+        <div className="name">
+            <span>{type}</span>
+            {children}
+        </div>
+    );
+}
+
+export default function SearchForm({ updateForm }: { updateForm: Dispatch<searchFormData> }) {
+    let [form, setForm] = useState<searchFormData>(defaultFormData);
 
     let [disable, setDisable] = useState(false);
 
@@ -71,7 +71,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                     Search
                 </button>
             </fieldset>
-            <NamedComponent type="score">
+            <LabelContainer type="score">
                 <input
                     type="range"
                     min="0"
@@ -83,8 +83,8 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         setForm({ ...form, max_score: e.target.value });
                     }}
                 ></input>
-            </NamedComponent>
-            <NamedComponent type="type">
+            </LabelContainer>
+            <LabelContainer type="type">
                 <RadioButton
                     type="type"
                     className="form_radio_button"
@@ -95,8 +95,8 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         setForm({ ...form, type: type });
                     }}
                 />
-            </NamedComponent>
-            <NamedComponent type="status">
+            </LabelContainer>
+            <LabelContainer type="status">
                 <RadioButton
                     type="status"
                     className="form_radio_button"
@@ -107,8 +107,8 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         setForm({ ...form, status: status });
                     }}
                 />
-            </NamedComponent>
-            <NamedComponent type="Order By">
+            </LabelContainer>
+            <LabelContainer type="Order By">
                 <RadioButton
                     type="orderby"
                     className="form_radio_button"
@@ -131,8 +131,8 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         setForm({ ...form, order_by: order });
                     }}
                 />
-            </NamedComponent>
-            <NamedComponent type="sort">
+            </LabelContainer>
+            <LabelContainer type="sort">
                 <RadioButton
                     type="sort"
                     className="form_radio_button"
@@ -144,7 +144,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<Search
                         setForm({ ...form, sort: sorttype });
                     }}
                 />
-            </NamedComponent>
+            </LabelContainer>
         </form>
     );
 }
