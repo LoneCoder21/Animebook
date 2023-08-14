@@ -1,12 +1,13 @@
-// TODO - Handle fetch errors
-
 import { Card, CardInfo } from "components/Card";
 import Spinner from "components/loaders/spinner";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Recommendations() {
     let [cards, setCards] = useState<CardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/recommendations/anime")
@@ -39,7 +40,9 @@ export default function Recommendations() {
                 setCards(unique_cards);
                 setLoading(false);
             })
-            .catch((error) => {});
+            .catch((error) => {
+                navigate("/error", { replace: true });
+            });
     }, []);
 
     return (

@@ -1,6 +1,7 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/animegrid";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
 
@@ -8,6 +9,7 @@ export default function Anime({ form }: { form: searchFormData }) {
     let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<CardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -45,8 +47,10 @@ export default function Anime({ form }: { form: searchFormData }) {
                 setCards(unique_cards);
                 setLoading(false);
             })
-            .catch((error) => {});
-    }, [loading]);
+            .catch((error) => {
+                navigate("/error", { replace: true });
+            });
+    }, [loading, navigate]);
 
     return (
         <div className="anime">

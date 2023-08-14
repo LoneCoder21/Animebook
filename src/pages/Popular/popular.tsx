@@ -6,6 +6,7 @@ import "assets/grid.scss";
 import "assets/spinner.scss";
 import RadioButton from "components/input/RadioButton";
 import Animegrid from "components/animegrid";
+import { useNavigate } from "react-router-dom";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -107,6 +108,8 @@ export default function Popular() {
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
 
+    const navigate = useNavigate();
+
     // converts from array of objects to one object with all properties
 
     let loadOptions = (e: OptionState[]) => {
@@ -164,7 +167,9 @@ export default function Popular() {
                 setCards(unique_cards);
                 setLoading(false);
             })
-            .catch((error) => {});
+            .catch((error) => {
+                navigate("/error", { replace: true });
+            });
     }, [options]);
 
     return (

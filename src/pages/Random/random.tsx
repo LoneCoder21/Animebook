@@ -12,6 +12,9 @@ export default function Random() {
             .then((data) => {
                 let anime_id = data["data"]["mal_id"] as number;
                 navigate(`/listing/${anime_id}`, { replace: true });
+            })
+            .catch((error) => {
+                navigate("/error", { replace: true });
             });
     }, [navigate]);
 
