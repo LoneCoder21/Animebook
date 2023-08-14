@@ -144,27 +144,10 @@ export default function Popular() {
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
-                    let json_info = data["data"][i];
-                    let info = {
-                        mal_id: json_info["mal_id"],
-                        title: json_info["title"],
-                        image: json_info["images"]["jpg"]["image_url"]
-                    } as CardInfo;
-                    new_cards.push(info);
+                    new_cards.push(CardInfo.fromJson(data["data"][i]));
                 }
 
-                let unique_cards: CardInfo[] = [];
-                let ids = new Set();
-
-                for (let i = 0; i < cards_size; ++i) {
-                    if (!ids.has(new_cards[i].mal_id)) {
-                        ids.add(new_cards[i].mal_id);
-                        unique_cards.push(new_cards[i]);
-                    }
-                }
-                // filter cards by mal id
-
-                setCards(unique_cards);
+                setCards(new_cards);
                 setLoading(false);
             })
             .catch((error) => {
