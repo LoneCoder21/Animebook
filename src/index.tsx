@@ -4,7 +4,7 @@ import "./assets/index.scss";
 import Home from "./pages/Home/Home";
 import Popular from "./pages/Popular/popular";
 import Random from "./pages/Random/random";
-import Error from "./pages/Error/errorpage";
+import Error from "./pages/errorpage";
 import ListingEntry from "./pages/Listing/listing";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
