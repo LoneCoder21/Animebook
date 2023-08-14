@@ -11,21 +11,14 @@ export function Card({ info }: { info: CardInfo }) {
     const navigate = useNavigate();
 
     return (
-        <div className="card">
-            <img
-                src={info.image}
-                alt={info.title}
-                onClick={() => {
-                    navigate(`/listing/${info.mal_id}`, { replace: false });
-                }}
-            ></img>
-            <p
-                onClick={() => {
-                    navigate(`/listing/${info.mal_id}`, { replace: false });
-                }}
-            >
-                {info.title}
-            </p>
+        <div
+            className="card"
+            onClick={() => {
+                navigate(`/listing/${info.mal_id}`, { replace: false });
+            }}
+        >
+            <img src={info.image} alt={info.title}></img>
+            <p>{info.title}</p>
         </div>
     );
 }
