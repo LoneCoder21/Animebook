@@ -13,6 +13,10 @@
         }
     }
 
+    label {
+        font-size: 16px;
+    }
+
     .search {
         display: flex;
 
@@ -29,8 +33,10 @@
             opacity: 1;
             border: 0;
             margin: 5px 0px;
-            flex-grow: 6;
-            height: 40px;
+
+            @media (width <= 600px) {
+                width: 100%;
+            }
 
             &:hover {
                 outline: 1px solid;
@@ -42,7 +48,6 @@
         }
 
         .search_button {
-            flex-grow: 1;
             background-color: rgb(75 224 125);
             margin: 5px 0px;
             padding: 0px 2px;
@@ -60,7 +65,7 @@
     }
 
     .form_radio_button {
-        @include radiobutton.radiobuttonhorizontal(green, rgb(75 224 125));
+        @include radiobutton.radiobutton(green, rgb(75 224 125));
         display: inline-block;
         border: 0px;
     }

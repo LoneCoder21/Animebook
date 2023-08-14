@@ -36,5 +36,5 @@
 }
 
 .popular_radio_button {
-    @include radiobutton.radiobuttonhorizontal(green, rgb(75, 224, 125));
+    @include radiobutton.radiobutton(green, rgb(75, 224, 125));
 }
