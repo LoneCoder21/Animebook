@@ -1,12 +1,12 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/animegrid";
 import { useEffect, useState } from "react";
-import { RecommendationInfo } from "./Recommendations";
-import { SearchFormData } from "./SearchForm";
+import { CardInfo } from "../../components/Card";
+import { searchFormData } from "./SearchForm";
 
-export default function Anime({ form }: { form: SearchFormData }) {
+export default function Anime({ form }: { form: searchFormData }) {
     let formdata = new URLSearchParams(form).toString();
-    let [cards, setCards] = useState<RecommendationInfo[] | null>(null);
+    let [cards, setCards] = useState<CardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function Anime({ form }: { form: SearchFormData }) {
         fetch("https://api.jikan.moe/v4/anime?" + formdata)
             .then((response) => response.json())
             .then((data) => {
-                let new_cards: RecommendationInfo[] = [];
+                let new_cards: CardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
@@ -27,11 +27,11 @@ export default function Anime({ form }: { form: SearchFormData }) {
                         mal_id: json_info["mal_id"],
                         title: json_info["title"],
                         image: json_info["images"]["jpg"]["image_url"]
-                    } as RecommendationInfo;
+                    } as CardInfo;
                     new_cards.push(info);
                 }
 
-                let unique_cards: RecommendationInfo[] = [];
+                let unique_cards: CardInfo[] = [];
                 let ids = new Set();
 
                 for (let i = 0; i < cards_size; ++i) {
