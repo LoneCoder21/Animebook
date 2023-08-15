@@ -23,7 +23,7 @@ export const defaultFormData = {
     order_by: "mal_id",
     sort: "desc",
     sfw: "true"
-};
+} as searchFormData;
 
 function LabelContainer({ type, children }: { type: string; children: JSX.Element }) {
     return (
@@ -36,7 +36,6 @@ function LabelContainer({ type, children }: { type: string; children: JSX.Elemen
 
 export default function SearchForm({ updateForm }: { updateForm: Dispatch<searchFormData> }) {
     let [form, setForm] = useState<searchFormData>(defaultFormData);
-
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {

@@ -110,8 +110,6 @@ export default function Popular() {
 
     const navigate = useNavigate();
 
-    // converts from array of objects to one object with all properties
-
     let loadOptions = (e: OptionState[]) => {
         setLoading(true);
         setOptions(e);
@@ -153,7 +151,7 @@ export default function Popular() {
             .catch((error) => {
                 navigate("/error", { replace: true });
             });
-    }, [options]);
+    }, [options, navigate]);
 
     return (
         <div className="popular">
