@@ -1,29 +1,44 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "components/header";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LoadPage from "pages/Loading/loading";
 
-export function Listing({ anime_id }: { anime_id: number }) {
+export type ListingData = {
+    anime_id: number;
+};
+
+export function Listing({ data }: { data: ListingData }) {
     return (
         <div>
             <Header />
-            {anime_id}
+            {data.anime_id}
         </div>
     );
-}
-
-function isGoodParam(id: string | undefined) {
-    return typeof id !== "undefined" && /^\d+$/.test(id); // checks if string is a number
 }
 
 export default function ListingEntry() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [listingdata, setListingData] = useState<ListingData | null>(null);
 
     useEffect(() => {
-        if (!isGoodParam(id)) {
-            navigate("/error", { replace: true });
-        }
+        fetch(`https://api.jikan.moe/v4/anime/${id}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setLoading(false);
+                setListingData({ anime_id: parseInt(id as string) });
+            })
+            .catch((error) => {
+                navigate("/error", { replace: true });
+            });
     }, [id, navigate]);
 
-    return isGoodParam(id) ? <Listing anime_id={parseInt(id as string)} /> : <Header></Header>;
+    return !loading && listingdata !== null ? <Listing data={listingdata} /> : <LoadPage />;
 }

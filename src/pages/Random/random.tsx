@@ -1,7 +1,6 @@
-import Header from "components/header";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Spinner from "components/loaders/spinner";
+import LoadPage from "pages/Loading/loading";
 
 export default function Random() {
     const navigate = useNavigate();
@@ -18,10 +17,5 @@ export default function Random() {
             });
     }, [navigate]);
 
-    return (
-        <>
-            <Header />
-            <Spinner />
-        </>
-    );
+    return <LoadPage />;
 }
