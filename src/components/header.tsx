@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { FaHome, FaRandom } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
-import "assets/images/book.jpg";
 import { BsFillBookFill } from "react-icons/bs";
 
 export function HeaderItem({
