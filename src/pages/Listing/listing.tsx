@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import LoadPage from "pages/Loading/loading";
 
 export type ListingData = {
-    anime_id: number;
+    id: number;
 };
 
 export function Listing({ data }: { data: ListingData }) {
     return (
         <div>
             <Header />
-            {data.anime_id}
+            {data.id}
         </div>
     );
 }
@@ -19,10 +19,12 @@ export function Listing({ data }: { data: ListingData }) {
 export default function ListingEntry() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+
     const [listingdata, setListingData] = useState<ListingData | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (id === undefined) return;
         fetch(`https://api.jikan.moe/v4/anime/${id}`)
             .then((response) => {
                 if (!response.ok) {
@@ -31,9 +33,8 @@ export default function ListingEntry() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 setLoading(false);
-                setListingData({ anime_id: parseInt(id as string) });
+                setListingData({ id: data["data"]["mal_id"] });
             })
             .catch((error) => {
                 navigate("/error", { replace: true });
