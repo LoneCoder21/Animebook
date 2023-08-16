@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { FaHome, FaRandom } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
+import "assets/images/book.jpg";
+import { BsFillBookFill } from "react-icons/bs";
 
 export function HeaderItem({
     to,
@@ -27,17 +29,17 @@ export default function Header() {
     return (
         <header>
             <div className="left">
-                <HeaderItem to="/" name="Home">
-                    <FaHome className="icon" size={25} />
+                <HeaderItem to="/" name="AnimeBook">
+                    <BsFillBookFill className="icon" size={25} />
                 </HeaderItem>
+            </div>
+            <div className="right">
                 <HeaderItem to="/popular" name="Popular">
                     <AiFillHeart className="icon" size={25} />
                 </HeaderItem>
                 <HeaderItem to="/random" name="Random">
                     <FaRandom className="icon" size={25} />
                 </HeaderItem>
-            </div>
-            <div className="right">
                 <HeaderItem to="https://github.com/LoneCoder21/Animebook" name="Github" newtab={true}>
                     <BsGithub className="icon" size={25} />
                 </HeaderItem>
