@@ -7,7 +7,12 @@ export default function Random() {
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/random/anime")
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then((data) => {
                 let anime_id = data["data"]["mal_id"] as number;
                 navigate(`/listing/${anime_id}`, { replace: true });

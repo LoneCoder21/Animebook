@@ -11,7 +11,12 @@ export default function Recommendations() {
 
     useEffect(() => {
         fetch("https://api.jikan.moe/v4/recommendations/anime")
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then((data) => {
                 let new_cards: CardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;

@@ -28,7 +28,7 @@ export default function ListingEntry() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                response.json();
+                return response.json();
             })
             .then((data) => {
                 console.log(data);
