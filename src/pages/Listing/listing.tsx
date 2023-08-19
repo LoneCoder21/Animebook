@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "components/header";
 import { useEffect, useState } from "react";
 import LoadPage from "pages/Loading/loading";
+import "assets/pages/Listing/listing.scss";
 
 export class ListingData {
     id: number;
@@ -81,7 +82,7 @@ export class ListingData {
 
 function ListingCard({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="display">
             <h3>{data.title}</h3>
             <img src={data.image} alt={data.title} />
         </div>
@@ -90,16 +91,16 @@ function ListingCard({ data }: { data: ListingData }) {
 
 function Synopsis({ data }: { data: ListingData }) {
     return (
-        <div>
-            <h4>Synopsis</h4>
-            {data.synopsis ? data.synopsis : "No synopsis found"}
+        <div className="synopsis">
+            <h3>Synopsis</h3>
+            <p>{data.synopsis ? data.synopsis : "No synopsis found"}</p>
         </div>
     );
 }
 
 function Premiere({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="premiere">
             <h3>{data.premiere && data.premiere?.season + " " + data.premiere?.year}</h3>
         </div>
     );
@@ -107,7 +108,7 @@ function Premiere({ data }: { data: ListingData }) {
 
 function Type({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="type">
             <h3>{data.type}</h3>
         </div>
     );
@@ -115,7 +116,7 @@ function Type({ data }: { data: ListingData }) {
 
 function Rating({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="rating">
             <p>{data.rating}</p>
         </div>
     );
@@ -123,7 +124,7 @@ function Rating({ data }: { data: ListingData }) {
 
 function Tags({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="tags">
             {data.genres.map((genre) => {
                 return <p key={genre}>{genre}</p>;
             })}
@@ -131,22 +132,33 @@ function Tags({ data }: { data: ListingData }) {
     );
 }
 
-function Score({ data }: { data: ListingData }) {
-    return <div>{data.stats.score && "Score - " + data.stats.score}</div>;
+function Stat({ name, value }: { name: string; value: number | undefined }) {
+    if (value === undefined) {
+        return <></>;
+    }
+    return (
+        <div className="stat">
+            <p>{name}</p>
+            <p>{value}</p>
+        </div>
+    );
 }
 
-function Rank({ data }: { data: ListingData }) {
-    return <div>{data.stats.rank && "Rank - " + data.stats.rank}</div>;
-}
-
-function Popularity({ data }: { data: ListingData }) {
-    return <div>{data.stats.popularity && "Popularity - " + data.stats.popularity}</div>;
+function Stats({ data }: { data: ListingData }) {
+    return (
+        <div className="stats">
+            <Stat name="Score" value={data.stats.score} />
+            <Stat name="Rank" value={data.stats.rank} />
+            <Stat name="Popularity" value={data.stats.popularity} />
+        </div>
+    );
 }
 
 function Info({ data }: { data: ListingData }) {
     return (
-        <div>
-            <p>{"Episodes - " + (data.episodes ? "Unknown" : data.episodes)}</p>
+        <div className="info">
+            <Stats data={data} />
+            <p>{"Episodes - " + (data.episodes ? data.episodes : "Unknown")}</p>
             <p>{"Duration - " + data.duration}</p>
             <p>{"Rating - " + data.rating}</p>
 
@@ -161,12 +173,12 @@ function Trailer({ data }: { data: ListingData }) {
     if (data.trailer == null) {
         return <></>;
     }
-    return <iframe src={data.trailer?.embed} />;
+    return <iframe src={data.trailer?.embed + "&autoplay=0"} />;
 }
 
 function Listing({ data }: { data: ListingData }) {
     return (
-        <div>
+        <div className="listing">
             <Header />
             <ListingCard data={data} />
             <Synopsis data={data} />
@@ -174,9 +186,6 @@ function Listing({ data }: { data: ListingData }) {
             <Type data={data} />
             <Rating data={data} />
             <Tags data={data} />
-            <Score data={data} />
-            <Rank data={data} />
-            <Popularity data={data} />
             <Info data={data} />
             <Trailer data={data} />
         </div>
