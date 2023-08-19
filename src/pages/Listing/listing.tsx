@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import LoadPage from "pages/Loading/loading";
 import "assets/pages/Listing/listing.scss";
 import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
-import { BsFillSunFill } from "react-icons/bs";
-import { PiFlowerFill } from "react-icons/pi";
+import { BsDiscFill, BsFillSunFill, BsGlobe } from "react-icons/bs";
+import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
+import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
+import { AiFillStar } from "react-icons/ai";
 
 export class ListingData {
     id: number;
@@ -105,37 +107,59 @@ function Premiere({ data }: { data: ListingData }) {
     if (data.premiere === undefined) {
         return <></>;
     }
-    const spring = <PiFlowerFill />;
-    const summer = <BsFillSunFill />;
-    const fall = <FaCanadianMapleLeaf />;
-    const winter = <FaSnowflake />;
     let icon = <></>;
+
     switch (data.premiere.season) {
         case "spring":
-            icon = spring;
+            icon = <PiFlowerFill />;
             break;
         case "summer":
-            icon = summer;
+            icon = <BsFillSunFill />;
             break;
         case "fall":
-            icon = fall;
+            icon = <FaCanadianMapleLeaf />;
             break;
         case "winter":
-            icon = winter;
+            icon = <FaSnowflake />;
             break;
     }
 
     return (
-        <div className="premiere">
+        <div className={"premiere " + data.premiere.season}>
             {icon}
-            <h3>{data.premiere.season + " " + data.premiere.year}</h3>
+            <h3>{data.premiere.season}</h3>
+            <h3>{data.premiere.year}</h3>
         </div>
     );
 }
 
 function Type({ data }: { data: ListingData }) {
+    let icon = <></>;
+
+    switch (data.type) {
+        case "TV":
+            icon = <PiTelevisionSimpleFill />;
+            break;
+        case "Movie":
+            icon = <BiSolidCameraMovie />;
+            break;
+        case "OVA":
+            icon = <BsDiscFill />;
+            break;
+        case "ONA":
+            icon = <BsGlobe />;
+            break;
+        case "Special":
+            icon = <AiFillStar />;
+            break;
+        case "Music":
+            icon = <BiSolidMusic />;
+            break;
+    }
+    console.log(data.type);
     return (
         <div className="type">
+            {icon}
             <h3>{data.type}</h3>
         </div>
     );

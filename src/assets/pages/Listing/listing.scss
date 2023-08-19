@@ -38,12 +38,35 @@
 
     .premiere,
     .type {
-        background-color: green;
-        display: inline-block;
+        display: inline-flex;
         padding: 5px 10px;
 
         border: solid transparent;
         border-radius: 15px;
+        flex-direction: row;
+        align-items: center;
+
+        * {
+            margin: 0 5px;
+        }
+    }
+
+    .premiere {
+        &.spring {
+            background-color: rgb(95 238 13);
+        }
+
+        &.summer {
+            background-color: rgb(255 251 6);
+        }
+
+        &.fall {
+            background-color: rgb(219 167 23);
+        }
+
+        &.winter {
+            background-color: rgb(0 247 255);
+        }
     }
 
     .rating p {
