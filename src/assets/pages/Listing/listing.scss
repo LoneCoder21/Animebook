@@ -31,6 +31,7 @@
         }
 
         p {
+            display: inline-block;
             text-align: left;
             font-size: 17px;
         }
@@ -69,40 +70,79 @@
         }
     }
 
-    .rating p {
-        font-size: 16px;
+    .rating {
+        display: inline-block;
+
+        p {
+            font-size: 16px;
+        }
     }
 
     .tags {
+        display: inline-block;
+
         * {
             display: inline-block;
             margin: 0 5px;
             background-color: rgb(220 255 201);
             padding: 3px;
             border-radius: 5px;
+            font-weight: bold;
         }
     }
 
     .info {
-        p {
-            font-size: 17px;
-        }
         display: flex;
-
         align-items: center;
         flex-direction: column;
+
+        p {
+            display: inline-block;
+            font-size: 19px;
+        }
+
+        .attribute {
+            .type {
+                padding: 0;
+                font-weight: bold;
+            }
+
+            .value {
+                display: inline;
+            }
+        }
     }
 
     .stats {
         .stat {
-            display: inline-block;
-            padding: 5px;
+            display: inline-flex;
+            padding: 5px 15px;
+            border: 3px solid black;
             border-radius: 10px;
+            flex-direction: column;
+            background-color: white;
+            margin: 0 2px;
 
             p {
                 margin-bottom: 5px;
+                font-size: 20px;
+                font-weight: bold;
             }
-            background-color: brown;
+
+            h2,
+            p {
+                text-transform: uppercase;
+            }
+        }
+
+        // a lerp from red to green
+
+        .score {
+            border-color: hsl(calc(var(--score) * 120) 100% 50%);
+
+            .value {
+                color: hsl(calc(var(--score) * 120) 80% 30%);
+            }
         }
     }
 }

@@ -183,14 +183,18 @@ function Tags({ data }: { data: ListingData }) {
     );
 }
 
-function Stat({ name, value }: { name: string; value: number | undefined }) {
+function Stat({ name, value }: { name: string; value: any }) {
     if (value === undefined) {
         return <></>;
     }
+    let style = {};
+    if (name === "score") {
+        style = { "--score": value / 10.0 } as React.CSSProperties;
+    }
     return (
-        <div className="stat">
-            <p>{name}</p>
-            <p>{value}</p>
+        <div className={"stat " + name} style={style}>
+            <h2 className="type">{name}</h2>
+            <p className="value">{value}</p>
         </div>
     );
 }
@@ -198,24 +202,34 @@ function Stat({ name, value }: { name: string; value: number | undefined }) {
 function Stats({ data }: { data: ListingData }) {
     return (
         <div className="stats">
-            <Stat name="Score" value={data.stats.score} />
-            <Stat name="Rank" value={data.stats.rank} />
-            <Stat name="Popularity" value={data.stats.popularity} />
+            <Stat name="score" value={data.stats.score} />
+            <Stat name="rank" value={data.stats.rank && "#" + data.stats.rank.toString()} />
+            {false && <Stat name="popularity" value={data.stats.popularity} />}
+        </div>
+    );
+}
+
+function InfoAttribute({ type, value }: { type: string; value: any }) {
+    return (
+        <div className="attribute">
+            <p className="type">{type + " -"}</p>
+            <p className="value">{value.toString()}</p>
         </div>
     );
 }
 
 function Info({ data }: { data: ListingData }) {
+    console.log(data.airing.airing);
     return (
         <div className="info">
             <Stats data={data} />
-            <p>{"Episodes - " + (data.episodes ? data.episodes : "Unknown")}</p>
-            <p>{"Duration - " + data.duration}</p>
-            <p>{"Rating - " + data.rating}</p>
+            <InfoAttribute type="Episodes" value={data.episodes ? data.episodes : "Unknown"} />
+            <InfoAttribute type="Duration" value={data.duration} />
+            <InfoAttribute type="Rating" value={data.rating} />
 
-            <p>{"Status - " + data.airing.status}</p>
-            <p>{"Airing - " + data.airing.airing}</p>
-            <p>{"Air Date - " + data.airing.description}</p>
+            <InfoAttribute type="Status" value={data.airing.status} />
+            <InfoAttribute type="Airing" value={data.airing.airing} />
+            <InfoAttribute type="Air Date" value={data.airing.description} />
         </div>
     );
 }
