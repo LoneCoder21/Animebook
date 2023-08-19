@@ -3,6 +3,9 @@ import Header from "components/header";
 import { useEffect, useState } from "react";
 import LoadPage from "pages/Loading/loading";
 import "assets/pages/Listing/listing.scss";
+import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
+import { BsFillSunFill } from "react-icons/bs";
+import { PiFlowerFill } from "react-icons/pi";
 
 export class ListingData {
     id: number;
@@ -99,9 +102,33 @@ function Synopsis({ data }: { data: ListingData }) {
 }
 
 function Premiere({ data }: { data: ListingData }) {
+    if (data.premiere === undefined) {
+        return <></>;
+    }
+    const spring = <PiFlowerFill />;
+    const summer = <BsFillSunFill />;
+    const fall = <FaCanadianMapleLeaf />;
+    const winter = <FaSnowflake />;
+    let icon = <></>;
+    switch (data.premiere.season) {
+        case "spring":
+            icon = spring;
+            break;
+        case "summer":
+            icon = summer;
+            break;
+        case "fall":
+            icon = fall;
+            break;
+        case "winter":
+            icon = winter;
+            break;
+    }
+
     return (
         <div className="premiere">
-            <h3>{data.premiere && data.premiere?.season + " " + data.premiere?.year}</h3>
+            {icon}
+            <h3>{data.premiere.season + " " + data.premiere.year}</h3>
         </div>
     );
 }
