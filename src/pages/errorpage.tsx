@@ -17,8 +17,11 @@ function errorMessage(error: unknown): string {
 
 // TODO - maybe don't route to error page, simply pop up the page as a separate component. also fixes to show the right error message
 
-export default function ErrorPage() {
-    const message = errorMessage(useRouteError());
+export default function ErrorPage({ msg }: { msg?: string }) {
+    let message = errorMessage(useRouteError());
+    if (msg) {
+        message = msg;
+    }
 
     return (
         <div className="errorpage">
