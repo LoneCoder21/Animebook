@@ -133,7 +133,7 @@ function TypeIcon({ type }: { type: string }) {
 function ListingCard({ data }: { data: ListingData }) {
     return (
         <div className="display">
-            <h3>{data.title + "fdasfdadfdasfssddsfsfds"}</h3>
+            <h3>{data.title}</h3>
             <img src={data.image} alt={data.title} />
             <Tags data={data} />
         </div>
