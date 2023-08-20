@@ -238,7 +238,7 @@ function Trailer({ data }: { data: ListingData }) {
     if (data.trailer == null) {
         return <></>;
     }
-    return <iframe src={data.trailer?.embed + "&autoplay=0"} />;
+    return <iframe src={data.trailer?.embed + "&autoplay=0"} title="Trailer" />;
 }
 
 function Listing({ data }: { data: ListingData }) {
