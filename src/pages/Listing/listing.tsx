@@ -268,6 +268,8 @@ function Info({ data }: { data: ListingData }) {
     );
 }
 
+//TODO - Fix iframe youtube when video fails to load. Ex. Country restriction, video removal, etc.
+
 function Trailer({ data }: { data: ListingData }) {
     if (data.trailer == null) {
         return <></>;
