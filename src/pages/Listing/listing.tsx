@@ -313,6 +313,10 @@ function Characters({ data }: { data: ListingData }) {
             });
     }, [navigate, data.id]);
 
+    if (characterdata?.length === 0) {
+        return <></>;
+    }
+
     return !loading && characterdata !== null ? (
         <div className="characters">
             <h4>Characters</h4>
