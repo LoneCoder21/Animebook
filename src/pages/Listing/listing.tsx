@@ -9,33 +9,6 @@ import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
 import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 
-class PremiereData {
-    season: string;
-    year: number;
-    constructor(season: string, year: number) {
-        this.season = season;
-        this.year = year;
-    }
-    getIcon(season: string) {
-        let icon = <></>;
-        switch (season) {
-            case "spring":
-                icon = <PiFlowerFill />;
-                break;
-            case "summer":
-                icon = <BsFillSunFill />;
-                break;
-            case "fall":
-                icon = <FaCanadianMapleLeaf />;
-                break;
-            case "winter":
-                icon = <FaSnowflake />;
-                break;
-        }
-        return icon;
-    }
-}
-
 export class ListingData {
     id: number;
     image: string;
@@ -112,6 +85,51 @@ export class ListingData {
     }
 }
 
+function PremiereIcon({ season }: { season: string }) {
+    let icon = <></>;
+    switch (season) {
+        case "spring":
+            icon = <PiFlowerFill />;
+            break;
+        case "summer":
+            icon = <BsFillSunFill />;
+            break;
+        case "fall":
+            icon = <FaCanadianMapleLeaf />;
+            break;
+        case "winter":
+            icon = <FaSnowflake />;
+            break;
+    }
+    return icon;
+}
+
+function TypeIcon({ type }: { type: string }) {
+    let icon = <></>;
+
+    switch (type) {
+        case "TV":
+            icon = <PiTelevisionSimpleFill />;
+            break;
+        case "Movie":
+            icon = <BiSolidCameraMovie />;
+            break;
+        case "OVA":
+            icon = <BsDiscFill />;
+            break;
+        case "ONA":
+            icon = <BsGlobe />;
+            break;
+        case "Special":
+            icon = <AiFillStar />;
+            break;
+        case "Music":
+            icon = <BiSolidMusic />;
+            break;
+    }
+    return icon;
+}
+
 function ListingCard({ data }: { data: ListingData }) {
     return (
         <div className="display">
@@ -135,25 +153,9 @@ function Premiere({ data }: { data: ListingData }) {
         return <></>;
     }
 
-    let icon = <></>;
-    switch (data.premiere.season) {
-        case "spring":
-            icon = <PiFlowerFill />;
-            break;
-        case "summer":
-            icon = <BsFillSunFill />;
-            break;
-        case "fall":
-            icon = <FaCanadianMapleLeaf />;
-            break;
-        case "winter":
-            icon = <FaSnowflake />;
-            break;
-    }
-
     return (
         <div className={"premiere " + data.premiere.season}>
-            {icon}
+            <PremiereIcon season={data.premiere.season} />
             <h3>{data.premiere.season}</h3>
             <h3>{data.premiere.year}</h3>
         </div>
@@ -161,32 +163,9 @@ function Premiere({ data }: { data: ListingData }) {
 }
 
 function Type({ data }: { data: ListingData }) {
-    let icon = <></>;
-
-    switch (data.type) {
-        case "TV":
-            icon = <PiTelevisionSimpleFill />;
-            break;
-        case "Movie":
-            icon = <BiSolidCameraMovie />;
-            break;
-        case "OVA":
-            icon = <BsDiscFill />;
-            break;
-        case "ONA":
-            icon = <BsGlobe />;
-            break;
-        case "Special":
-            icon = <AiFillStar />;
-            break;
-        case "Music":
-            icon = <BiSolidMusic />;
-            break;
-    }
-
     return (
         <div className="type">
-            {icon}
+            <TypeIcon type={data.type} />
             <h3>{data.type}</h3>
         </div>
     );
