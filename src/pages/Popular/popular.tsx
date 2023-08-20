@@ -1,5 +1,5 @@
 import Header from "components/header";
-import { CardInfo } from "components/Card";
+import { AnimeCardInfo } from "components/Card";
 import { useState, Dispatch, useEffect } from "react";
 import "assets/pages/Popular/popular.scss";
 import "assets/grid.scss";
@@ -104,7 +104,7 @@ export function OptionsForm({
 
 export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
-    let [cards, setCards] = useState<CardInfo[] | null>(null);
+    let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
 
@@ -143,11 +143,11 @@ export default function Popular() {
                 return response.json();
             })
             .then((data) => {
-                let new_cards: CardInfo[] = [];
+                let new_cards: AnimeCardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
-                    new_cards.push(CardInfo.fromJson(data["data"][i]));
+                    new_cards.push(AnimeCardInfo.fromJson(data["data"][i]));
                 }
 
                 setCards(new_cards);

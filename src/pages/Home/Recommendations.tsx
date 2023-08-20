@@ -1,10 +1,10 @@
-import { Card, CardInfo } from "components/Card";
+import { AnimeCard, AnimeCardInfo } from "components/Card";
 import Spinner from "components/loaders/spinner";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Recommendations() {
-    let [cards, setCards] = useState<CardInfo[] | null>(null);
+    let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
@@ -18,11 +18,11 @@ export default function Recommendations() {
                 return response.json();
             })
             .then((data) => {
-                let new_cards: CardInfo[] = [];
+                let new_cards: AnimeCardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
-                    new_cards.push(CardInfo.fromJson(data["data"][i]["entry"][0]));
+                    new_cards.push(AnimeCardInfo.fromJson(data["data"][i]["entry"][0]));
                 }
 
                 setCards(new_cards);
@@ -39,7 +39,7 @@ export default function Recommendations() {
             <div className="recommendations">
                 {loading && <Spinner />}
                 {cards?.map((item, index) => {
-                    return <Card key={index} info={item} />;
+                    return <AnimeCard key={index} info={item} />;
                 })}
             </div>
         </div>
