@@ -1,13 +1,13 @@
-import { useParams, useNavigate } from "react-router-dom";
-import Header from "components/header";
-import { useEffect, useState } from "react";
-import LoadPage from "pages/Loading/loading";
 import "assets/pages/Listing/listing.scss";
-import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
-import { BsDiscFill, BsFillSunFill, BsGlobe } from "react-icons/bs";
-import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
-import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
+import Header from "components/header";
+import LoadPage from "pages/Loading/loading";
+import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
+import { BsDiscFill, BsFillSunFill, BsGlobe } from "react-icons/bs";
+import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
+import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
+import { useNavigate, useParams } from "react-router-dom";
 
 export class ListingData {
     id: number;
@@ -16,7 +16,7 @@ export class ListingData {
     type: string;
     episodes?: number;
     duration: string;
-    rating: string;
+    rating?: string;
     synopsis?: string;
     genres: string[];
     themes: string[];
@@ -172,10 +172,12 @@ function Type({ data }: { data: ListingData }) {
 }
 
 function Rating({ data }: { data: ListingData }) {
-    return (
+    return data.rating ? (
         <div className="rating">
             <p>{data.rating}</p>
         </div>
+    ) : (
+        <></>
     );
 }
 
@@ -193,10 +195,8 @@ function Stat({ name, value }: { name: string; value: any }) {
     if (!value) {
         return <></>;
     }
-    let style = {};
-    if (name === "score") {
-        style = { "--score": value / 10.0 } as React.CSSProperties;
-    }
+
+    let style = { "--score": value / 10.0 } as React.CSSProperties;
     return (
         <div className={"stat " + name} style={style}>
             <h2 className="type">{name}</h2>
@@ -206,7 +206,6 @@ function Stat({ name, value }: { name: string; value: any }) {
 }
 
 function Stats({ data }: { data: ListingData }) {
-    console.log(data.stats.score);
     return (
         <div className="stats">
             <Stat name="score" value={data.stats.score} />
@@ -217,16 +216,18 @@ function Stats({ data }: { data: ListingData }) {
 }
 
 function InfoAttribute({ type, value }: { type: string; value: any }) {
+    if (!value) {
+        return <></>;
+    }
     return (
         <div className="attribute">
             <p className="type">{type + " -"}</p>
-            <p className="value">{value.toString()}</p>
+            <p className="value">{value}</p>
         </div>
     );
 }
 
 function Info({ data }: { data: ListingData }) {
-    console.log(data.airing.airing);
     return (
         <div className="info">
             <Stats data={data} />
@@ -235,8 +236,7 @@ function Info({ data }: { data: ListingData }) {
             <InfoAttribute type="Rating" value={data.rating} />
 
             <InfoAttribute type="Status" value={data.airing.status} />
-            <InfoAttribute type="Airing" value={data.airing.airing} />
-            <InfoAttribute type="Air Date" value={data.airing.description} />
+            <InfoAttribute type="Aired" value={data.airing.description} />
         </div>
     );
 }
@@ -245,7 +245,7 @@ function Trailer({ data }: { data: ListingData }) {
     if (data.trailer == null) {
         return <></>;
     }
-    return <iframe src={data.trailer?.embed + "&autoplay=0"} title="Trailer" />;
+    return <iframe src={data.trailer.embed + "&autoplay=0"} title="Trailer" />;
 }
 
 function Listing({ data }: { data: ListingData }) {
