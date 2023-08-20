@@ -1,0 +1,23 @@
+.characters {
+    .listings {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+
+        .character {
+            flex-shrink: 0;
+
+            h5 {
+                margin-bottom: 0px;
+            }
+
+            img {
+                width: 140px;
+            }
+
+            p {
+                display: inline-block;
+            }
+        }
+    }
+}

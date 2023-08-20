@@ -40,7 +40,7 @@ export default function Anime({ form }: { form: searchFormData }) {
             .catch((err) => {
                 setError(err.toString());
             });
-    }, [loading]); // eslint-disable-line
+    }, [loading, formdata]);
 
     if (error) {
         return <ErrorPage msg={error} />;
