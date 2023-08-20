@@ -187,6 +187,9 @@ function Tags({ data }: { data: ListingData }) {
             {data.genres.map((genre) => {
                 return <p key={genre}>{genre}</p>;
             })}
+            {data.themes.map((theme) => {
+                return <p key={theme}>{theme}</p>;
+            })}
         </div>
     );
 }
