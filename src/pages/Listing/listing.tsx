@@ -10,7 +10,6 @@ import Info from "./info";
 import { DisplayCard, Premiere, Rating, Synopsis, Type } from "./maininfo";
 import Trailer from "./trailer";
 
-// TODO - Clean up code in separate files
 // TODO - Handle multi network calls with rate limit
 
 export class ListingData {
