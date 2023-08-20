@@ -1,7 +1,7 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/animegrid";
+import ErrorPage from "pages/errorpage";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AnimeCardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
 
@@ -10,8 +10,8 @@ import { searchFormData } from "./SearchForm";
 export default function Anime({ form }: { form: searchFormData }) {
     let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
+    const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -37,10 +37,14 @@ export default function Anime({ form }: { form: searchFormData }) {
                 setCards(new_cards);
                 setLoading(false);
             })
-            .catch((error) => {
-                navigate("/error", { replace: true });
+            .catch((err) => {
+                setError(err.toString());
             });
-    }, [loading, navigate]); // eslint-disable-line
+    }, [loading]); // eslint-disable-line
+
+    if (error) {
+        return <ErrorPage msg={error} />;
+    }
 
     return (
         <div className="anime">

@@ -1,14 +1,15 @@
 import "assets/pages/Listing/listing.scss";
 import Header from "components/header";
 import Spinner from "components/loaders/spinner";
+import ErrorPage from "pages/errorpage";
 import LoadPage from "pages/Loading/loading";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
 import { BsDiscFill, BsFillSunFill, BsGlobe } from "react-icons/bs";
 import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
 import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // TODO - Clean up code in separate files
 // TODO - Handle multi network calls with rate limit
@@ -284,16 +285,15 @@ function Character({ data }: { data: CharacterData }) {
     );
 }
 
-function Characters({ data }: { data: ListingData }) {
+function Characters({ data, setError }: { data: ListingData; setError: Dispatch<string> }) {
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Status: ${response.status}`);
                 }
                 return response.json();
             })
@@ -308,10 +308,10 @@ function Characters({ data }: { data: ListingData }) {
                 setLoading(false);
                 setCharacterData(new_cards);
             })
-            .catch((error) => {
-                navigate("/error", { replace: true });
+            .catch((err) => {
+                setError(err.toString());
             });
-    }, [navigate, data.id]);
+    }, [data.id]);
 
     return !loading && characterdata !== null ? (
         <div className="characters">
@@ -327,7 +327,7 @@ function Characters({ data }: { data: ListingData }) {
     );
 }
 
-function Listing({ data }: { data: ListingData }) {
+function Listing({ data, setError }: { data: ListingData; setError: Dispatch<string> }) {
     return (
         <div className="listing">
             <Header />
@@ -338,16 +338,16 @@ function Listing({ data }: { data: ListingData }) {
             <Rating data={data} />
             <Info data={data} />
             <Trailer data={data} />
-            <Characters data={data} />
+            <Characters data={data} setError={setError} />
         </div>
     );
 }
 
 export default function ListingEntry() {
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [listingdata, setListingData] = useState<ListingData | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -355,7 +355,7 @@ export default function ListingEntry() {
         fetch(`https://api.jikan.moe/v4/anime/${id}`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Status: ${response.status}`);
                 }
                 return response.json();
             })
@@ -363,10 +363,14 @@ export default function ListingEntry() {
                 setLoading(false);
                 setListingData(ListingData.fromJson(data["data"]));
             })
-            .catch((error) => {
-                navigate("/error", { replace: true });
+            .catch((err) => {
+                setError(err.toString());
             });
-    }, [id, navigate]);
+    }, [id]);
 
-    return !loading && listingdata !== null ? <Listing data={listingdata} /> : <LoadPage />;
+    if (error) {
+        return <ErrorPage msg={error} />;
+    }
+
+    return !loading && listingdata !== null ? <Listing data={listingdata} setError={setError} /> : <LoadPage />;
 }

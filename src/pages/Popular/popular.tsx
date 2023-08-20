@@ -6,7 +6,7 @@ import "assets/grid.scss";
 import "assets/spinner.scss";
 import RadioButton from "components/input/RadioButton";
 import Animegrid from "components/animegrid";
-import { useNavigate } from "react-router-dom";
+import ErrorPage from "pages/errorpage";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -105,10 +105,9 @@ export function OptionsForm({
 export default function Popular() {
     let [options, setOptions] = useState<OptionState[]>(createOptionState());
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
+    const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
-
-    const navigate = useNavigate();
 
     let loadOptions = (e: OptionState[]) => {
         setLoading(true);
@@ -153,10 +152,14 @@ export default function Popular() {
                 setCards(new_cards);
                 setLoading(false);
             })
-            .catch((error) => {
-                navigate("/error", { replace: true });
+            .catch((err) => {
+                setError(err.toString());
             });
-    }, [options, navigate]);
+    }, [options]);
+
+    if (error) {
+        return <ErrorPage msg={error} />;
+    }
 
     return (
         <div className="popular">
