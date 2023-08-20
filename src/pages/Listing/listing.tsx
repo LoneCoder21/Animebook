@@ -295,7 +295,7 @@ function Characters({ data, setError }: { data: ListingData; setError: Dispatch<
         fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`Status: ${response.status}`);
+                    throw new Error(`${response.status} - ${response.statusText}`);
                 }
                 return response.json();
             })
@@ -361,7 +361,7 @@ export default function ListingEntry() {
         fetch(`https://api.jikan.moe/v4/anime/${id}`)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error(`Status: ${response.status}`);
+                    throw new Error(`${response.status} - ${response.statusText}`);
                 }
                 return response.json();
             })
