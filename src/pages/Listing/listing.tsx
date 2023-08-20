@@ -1,5 +1,6 @@
 import "assets/pages/Listing/listing.scss";
 import Header from "components/header";
+import Spinner from "components/loaders/spinner";
 import LoadPage from "pages/Loading/loading";
 import { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
@@ -8,6 +9,9 @@ import { BsDiscFill, BsFillSunFill, BsGlobe } from "react-icons/bs";
 import { FaCanadianMapleLeaf, FaSnowflake } from "react-icons/fa";
 import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
 import { useNavigate, useParams } from "react-router-dom";
+
+// TODO - Clean up code in separate files
+// TODO - Handle multi network calls with rate limit
 
 export class ListingData {
     id: number;
@@ -307,16 +311,19 @@ function Characters({ data }: { data: ListingData }) {
             .catch((error) => {
                 navigate("/error", { replace: true });
             });
-    }, [navigate]);
+    }, [navigate, data.id]);
 
     return !loading && characterdata !== null ? (
         <div className="characters">
-            {characterdata.map((character, index) => {
-                return <Character key={index} data={character} />;
-            })}
+            <h4>Characters</h4>
+            <div className="listings">
+                {characterdata.map((character, index) => {
+                    return <Character key={index} data={character} />;
+                })}
+            </div>
         </div>
     ) : (
-        <LoadPage />
+        <Spinner />
     );
 }
 

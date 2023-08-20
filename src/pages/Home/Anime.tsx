@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { AnimeCardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
 
+// TODO - Paginate data
+
 export default function Anime({ form }: { form: searchFormData }) {
     let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
