@@ -24,8 +24,6 @@ export function HeaderItem({
     );
 }
 
-// TODO - fix header responsive issue
-
 export default function Header() {
     return (
         <header>

@@ -1,7 +1,7 @@
 header {
     background-color: rgb(76 196 60);
     position: sticky;
-    padding: 5px 0px;
+    padding: 0px;
     top: 0;
     z-index: 1;
     display: flex;
@@ -13,7 +13,7 @@ header {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        padding: 0 20px;
+        padding: 5px 20px;
         color: black;
         font-weight: 600;
 
@@ -31,6 +31,8 @@ header {
 
         .Jikan {
             font-size: 17px;
+            margin-top: 0px;
+            padding-top: 0px;
 
             &::first-letter {
                 font-size: 30px;
@@ -41,5 +43,6 @@ header {
     .left,
     .right {
         display: flex;
+        flex-flow: row wrap;
     }
 }
