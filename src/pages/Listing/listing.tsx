@@ -9,6 +9,33 @@ import { PiFlowerFill, PiTelevisionSimpleFill } from "react-icons/pi";
 import { BiSolidCameraMovie, BiSolidMusic } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 
+class PremiereData {
+    season: string;
+    year: number;
+    constructor(season: string, year: number) {
+        this.season = season;
+        this.year = year;
+    }
+    getIcon(season: string) {
+        let icon = <></>;
+        switch (season) {
+            case "spring":
+                icon = <PiFlowerFill />;
+                break;
+            case "summer":
+                icon = <BsFillSunFill />;
+                break;
+            case "fall":
+                icon = <FaCanadianMapleLeaf />;
+                break;
+            case "winter":
+                icon = <FaSnowflake />;
+                break;
+        }
+        return icon;
+    }
+}
+
 export class ListingData {
     id: number;
     image: string;
@@ -104,11 +131,11 @@ function Synopsis({ data }: { data: ListingData }) {
 }
 
 function Premiere({ data }: { data: ListingData }) {
-    if (data.premiere === undefined) {
+    if (!data.premiere) {
         return <></>;
     }
-    let icon = <></>;
 
+    let icon = <></>;
     switch (data.premiere.season) {
         case "spring":
             icon = <PiFlowerFill />;
@@ -156,7 +183,7 @@ function Type({ data }: { data: ListingData }) {
             icon = <BiSolidMusic />;
             break;
     }
-    console.log(data.type);
+
     return (
         <div className="type">
             {icon}
@@ -184,7 +211,7 @@ function Tags({ data }: { data: ListingData }) {
 }
 
 function Stat({ name, value }: { name: string; value: any }) {
-    if (value === undefined) {
+    if (!value) {
         return <></>;
     }
     let style = {};
@@ -200,6 +227,7 @@ function Stat({ name, value }: { name: string; value: any }) {
 }
 
 function Stats({ data }: { data: ListingData }) {
+    console.log(data.stats.score);
     return (
         <div className="stats">
             <Stat name="score" value={data.stats.score} />
