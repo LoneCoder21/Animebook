@@ -85,6 +85,24 @@ export class ListingData {
     }
 }
 
+class CharacterData {
+    mal_id: number;
+    name: string;
+    image: string;
+    role: string;
+
+    constructor(json: any) {
+        this.mal_id = json["character"]["mal_id"];
+        this.name = json["character"]["name"];
+        this.image = json["character"]["images"]["jpg"]["image_url"];
+        this.role = json["role"];
+    }
+
+    static fromJson(json: any): CharacterData {
+        return new CharacterData(json);
+    }
+}
+
 function PremiereIcon({ season }: { season: string }) {
     let icon = <></>;
     switch (season) {
@@ -252,6 +270,56 @@ function Trailer({ data }: { data: ListingData }) {
     return <iframe src={data.trailer.embed + "&autoplay=0"} title="Trailer" />;
 }
 
+function Character({ data }: { data: CharacterData }) {
+    return (
+        <div className="character">
+            <img src={data.image} alt={data.name} />
+            <h5>{data.name}</h5>
+            <p>{data.role}</p>
+        </div>
+    );
+}
+
+function Characters({ data }: { data: ListingData }) {
+    const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let new_cards: CharacterData[] = [];
+                const cards_size = Object.keys(data["data"]).length;
+
+                for (let i = 0; i < cards_size; ++i) {
+                    new_cards.push(CharacterData.fromJson(data["data"][i]));
+                }
+
+                setLoading(false);
+                setCharacterData(new_cards);
+            })
+            .catch((error) => {
+                navigate("/error", { replace: true });
+            });
+    }, [navigate]);
+
+    return !loading && characterdata !== null ? (
+        <div className="characters">
+            {characterdata.map((character, index) => {
+                return <Character key={index} data={character} />;
+            })}
+        </div>
+    ) : (
+        <LoadPage />
+    );
+}
+
 function Listing({ data }: { data: ListingData }) {
     return (
         <div className="listing">
@@ -263,6 +331,7 @@ function Listing({ data }: { data: ListingData }) {
             <Rating data={data} />
             <Info data={data} />
             <Trailer data={data} />
+            <Characters data={data} />
         </div>
     );
 }

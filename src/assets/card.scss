@@ -25,15 +25,17 @@
         text-overflow: ellipsis;
     }
 
-    &:hover {
-        cursor: pointer;
+    &.anime {
+        &:hover {
+            cursor: pointer;
 
-        > img {
-            border-color: rgb(161 95 9);
-        }
+            > img {
+                border-color: rgb(161 95 9);
+            }
 
-        p {
-            color: rgb(161 95 9);
+            p {
+                color: rgb(161 95 9);
+            }
         }
     }
 

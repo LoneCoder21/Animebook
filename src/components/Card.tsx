@@ -48,7 +48,7 @@ export function AnimeCard({ info }: { info: AnimeCardInfo }) {
 
     return (
         <div
-            className="card"
+            className="card anime"
             onClick={() => {
                 navigate(`/listing/${info.mal_id}`, { replace: false });
             }}
