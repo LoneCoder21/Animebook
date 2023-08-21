@@ -2,7 +2,7 @@ import "assets/pages/Listing/listing.scss";
 import Header from "components/header";
 import ErrorPage from "pages/errorpage";
 import LoadPage from "pages/Loading/loading";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import Characters from "./character";
@@ -88,7 +88,7 @@ export class ListingData {
     }
 }
 
-function Listing({ data, setError }: { data: ListingData; setError: Dispatch<string> }) {
+function Listing({ data }: { data: ListingData }) {
     return (
         <div className="listing">
             <Header />
@@ -99,7 +99,7 @@ function Listing({ data, setError }: { data: ListingData; setError: Dispatch<str
             <Rating data={data} />
             <Info data={data} />
             <Trailer data={data} />
-            <Characters data={data} setError={setError} />
+            <Characters data={data} />
         </div>
     );
 }
@@ -133,5 +133,5 @@ export default function ListingEntry() {
         return <ErrorPage msg={error} />;
     }
 
-    return !loading && listingdata !== null ? <Listing data={listingdata} setError={setError} /> : <LoadPage />;
+    return !loading && listingdata !== null ? <Listing data={listingdata} /> : <LoadPage />;
 }

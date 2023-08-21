@@ -1,5 +1,5 @@
 import Spinner from "components/loaders/spinner";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ListingData } from "./listing";
 import "assets/pages/Listing/character.scss";
 
@@ -31,7 +31,7 @@ function Character({ data }: { data: CharacterData }) {
     );
 }
 
-export default function Characters({ data, setError }: { data: ListingData; setError: Dispatch<string> }) {
+export default function Characters({ data }: { data: ListingData }) {
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
     const [wait, setWait] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -67,10 +67,10 @@ export default function Characters({ data, setError }: { data: ListingData; setE
                     setCharacterData(new_cards);
                 })
                 .catch((err) => {
-                    setError(err.toString());
+                    setCharacterData([]); //don't display characters when an error happens
                 });
         }
-    }, [wait, data.id, setError]);
+    }, [wait, data.id]);
 
     if (characterdata?.length === 0) {
         return <></>;
