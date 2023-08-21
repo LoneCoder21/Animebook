@@ -145,12 +145,32 @@ export default function Popular() {
                 let new_cards: AnimeCardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
+                const loadImage = (src: string) => {
+                    return new Promise<HTMLImageElement>((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = () => resolve(img);
+                        img.onerror = reject;
+                        img.src = src;
+                    });
+                };
+
                 for (let i = 0; i < cards_size; ++i) {
-                    new_cards.push(AnimeCardInfo.fromJson(data["data"][i]));
+                    let card = AnimeCardInfo.fromJson(data["data"][i]);
+                    new_cards.push(card);
                 }
 
-                setCards(new_cards);
-                setLoading(false);
+                Promise.all(
+                    new_cards.map((card) => {
+                        return loadImage(card.image);
+                    })
+                ).then((images: HTMLImageElement[]) => {
+                    images.forEach((image, index) => {
+                        new_cards[index].image_width = image.width;
+                        new_cards[index].image_height = image.height;
+                    });
+                    setCards(new_cards);
+                    setLoading(false);
+                });
             })
             .catch((err) => {
                 setError(err.toString());

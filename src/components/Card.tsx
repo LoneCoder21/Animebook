@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 export class CardInfo {
     title: string;
     image: string;
+    image_width?: number;
+    image_height?: number;
 
     constructor(title: string, image: string) {
         this.title = title;
@@ -16,6 +18,15 @@ export class CardInfo {
             image: json["images"]["jpg"]["image_url"]
         } as CardInfo;
     }
+
+    static imageHeightComparator() {
+        return (a: CardInfo, b: CardInfo) => {
+            if (!a.image_height || !b.image_height) {
+                return 0;
+            }
+            return b.image_height - a.image_height;
+        };
+    } //sort images by decreasing height so it looks better on the grid
 }
 export class AnimeCardInfo extends CardInfo {
     mal_id: number;
