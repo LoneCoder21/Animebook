@@ -6,7 +6,7 @@ import "assets/pages/Listing/character.scss";
 export class CharacterData {
     mal_id: number;
     name: string;
-    image: string;
+    image?: string;
     role: string;
 
     constructor(json: any) {
@@ -57,7 +57,10 @@ export default function Characters({ data, setError }: { data: ListingData; setE
                     const cards_size = Object.keys(data["data"]).length;
 
                     for (let i = 0; i < cards_size; ++i) {
-                        new_cards.push(CharacterData.fromJson(data["data"][i]));
+                        let character = CharacterData.fromJson(data["data"][i]);
+                        if (character.image) {
+                            new_cards.push(character);
+                        } // ignore null images characters
                     }
 
                     setLoading(false);
@@ -67,7 +70,7 @@ export default function Characters({ data, setError }: { data: ListingData; setE
                     setError(err.toString());
                 });
         }
-    }, [wait]);
+    }, [wait, data.id, setError]);
 
     if (characterdata?.length === 0) {
         return <></>;
