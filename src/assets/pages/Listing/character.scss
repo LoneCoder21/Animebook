@@ -6,6 +6,9 @@
 
         .character {
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             h5 {
                 margin-bottom: 0px;
@@ -13,10 +16,14 @@
 
             img {
                 width: 140px;
+                height: 220px;
+                object-fit: cover;
+                object-position: top;
             }
 
             p {
                 display: inline-block;
+                text-align: left;
             }
         }
     }

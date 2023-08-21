@@ -33,31 +33,41 @@ function Character({ data }: { data: CharacterData }) {
 
 export default function Characters({ data, setError }: { data: ListingData; setError: Dispatch<string> }) {
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
+    const [wait, setWait] = useState(true);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`${response.status} - ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                let new_cards: CharacterData[] = [];
-                const cards_size = Object.keys(data["data"]).length;
+        if (wait) {
+            //wait for a second to load characters. important for rate limit restriction
+            const timer = setTimeout(() => {
+                setWait(false);
+            }, 1000);
+            return () => clearTimeout(timer);
+        } else {
+            //after wait we fetch the characters and display it
+            fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    let new_cards: CharacterData[] = [];
+                    const cards_size = Object.keys(data["data"]).length;
 
-                for (let i = 0; i < cards_size; ++i) {
-                    new_cards.push(CharacterData.fromJson(data["data"][i]));
-                }
+                    for (let i = 0; i < cards_size; ++i) {
+                        new_cards.push(CharacterData.fromJson(data["data"][i]));
+                    }
 
-                setLoading(false);
-                setCharacterData(new_cards);
-            })
-            .catch((err) => {
-                setError(err.toString());
-            });
-    }, [data.id, setError]);
+                    setLoading(false);
+                    setCharacterData(new_cards);
+                })
+                .catch((err) => {
+                    setError(err.toString());
+                });
+        }
+    }, [wait]);
 
     if (characterdata?.length === 0) {
         return <></>;
