@@ -103,11 +103,21 @@ export function OptionsForm({
 // TODO - improve state logic
 
 export default function Popular() {
-    let [options, setOptions] = useState<OptionState[]>(createOptionState());
+    let [options, setOptions] = useState<OptionState[] | null>(null);
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
     const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
+
+    useEffect(() => {
+        const l = localStorage.getItem("options")!;
+        const optionstorage = JSON.parse(l);
+        if (optionstorage) {
+            setOptions(optionstorage);
+        } else {
+            setOptions(createOptionState());
+        }
+    }, []);
 
     let loadOptions = (e: OptionState[]) => {
         setLoading(true);
@@ -124,6 +134,10 @@ export default function Popular() {
     }, [disable]);
 
     useEffect(() => {
+        if (options == null) return;
+        const s = JSON.stringify(options);
+        localStorage.setItem("options", s);
+
         const mapped = options.map((item) => ({
             [item.type]: item.option
         }));
@@ -184,7 +198,7 @@ export default function Popular() {
     return (
         <div className="popular">
             <Header />
-            <OptionsForm data={options} setDataCallback={loadOptions} disabled={disable} />
+            {options && <OptionsForm data={options} setDataCallback={loadOptions} disabled={disable} />}
             <Animegrid loading={loading} cards={cards} />
         </div>
     );

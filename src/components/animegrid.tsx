@@ -6,7 +6,6 @@ import Empty from "./empty";
 export default function Animegrid({ loading, cards }: { loading: boolean; cards: AnimeCardInfo[] | null }) {
     let sorted_cards = structuredClone(cards) as typeof cards;
     sorted_cards?.sort(AnimeCardInfo.imageHeightComparator());
-    console.log(sorted_cards);
     return (
         <div className="grid_container">
             {loading && <Spinner />}

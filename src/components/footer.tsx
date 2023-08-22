@@ -1,5 +1,4 @@
 import "assets/footer.scss";
-import { Link } from "react-router-dom";
 
 // TODO - Create a footer
 
