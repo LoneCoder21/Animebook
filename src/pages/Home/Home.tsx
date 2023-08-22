@@ -7,13 +7,15 @@ import Header from "components/header";
 import { searchFormData } from "./SearchForm";
 import { useState } from "react";
 import ErrorPage from "pages/errorpage";
+import { useNavigate } from "react-router";
 
 export default function Home() {
     let [form, setFormRequest] = useState<searchFormData | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     if (error) {
-        return <ErrorPage msg={error} />;
+        navigate("/error", { replace: true });
     }
 
     return (
