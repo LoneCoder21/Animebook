@@ -1,16 +1,14 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/animegrid";
-import ErrorPage from "pages/errorpage";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { AnimeCardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
 
 // TODO - Paginate data
 
-export default function Anime({ form }: { form: searchFormData }) {
+export default function Anime({ form, setError }: { form: searchFormData; setError: Dispatch<string | null> }) {
     let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
-    const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -60,11 +58,7 @@ export default function Anime({ form }: { form: searchFormData }) {
             .catch((err) => {
                 setError(err.toString());
             });
-    }, [loading, formdata]);
-
-    if (error) {
-        return <ErrorPage msg={error} />;
-    }
+    }, [loading, formdata, setError]);
 
     return (
         <div className="anime">

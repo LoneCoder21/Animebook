@@ -44,10 +44,12 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
         const formstorage = JSON.parse(l);
         if (formstorage) {
             setFormData(formstorage);
+            updateForm(formstorage);
         } else {
             setFormData(defaultFormData);
+            updateForm(defaultFormData);
         }
-    }, []);
+    }, [updateForm]);
 
     useEffect(() => {
         if (form == null) {
@@ -106,13 +108,14 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                 </LabelContainer>
                 <LabelContainer type="type">
                     <select
+                        defaultValue={formdata.type}
                         onChange={(e) => {
                             setFormData({ ...formdata, type: e.target.value });
                         }}
                     >
                         {["tv", "movie", "ova", "special", "ona", "music"].map((value) => {
                             return (
-                                <option key={value} value={value} selected={value === formdata.type}>
+                                <option key={value} value={value}>
                                     {value}
                                 </option>
                             );
@@ -121,13 +124,14 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                 </LabelContainer>
                 <LabelContainer type="status">
                     <select
+                        defaultValue={formdata.status}
                         onChange={(e) => {
                             setFormData({ ...formdata, status: e.target.value });
                         }}
                     >
                         {["complete", "airing", "upcoming"].map((value) => {
                             return (
-                                <option key={value} value={value} selected={value === formdata.status}>
+                                <option key={value} value={value}>
                                     {value}
                                 </option>
                             );
@@ -136,6 +140,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                 </LabelContainer>
                 <LabelContainer type="Order By">
                     <select
+                        defaultValue={formdata.order_by}
                         onChange={(e) => {
                             setFormData({ ...formdata, order_by: e.target.value });
                         }}
@@ -154,7 +159,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                             "favorites"
                         ].map((value) => {
                             return (
-                                <option key={value} value={value} selected={value === formdata.order_by}>
+                                <option key={value} value={value}>
                                     {value}
                                 </option>
                             );
