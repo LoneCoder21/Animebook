@@ -1,5 +1,6 @@
 import "assets/pages/Home/searchform.scss";
 import "assets/input/slider.scss";
+import "assets/input/select.scss";
 import RadioButton from "components/input/RadioButton";
 import { Dispatch, useEffect, useState } from "react";
 
@@ -104,34 +105,42 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                     ></input>
                 </LabelContainer>
                 <LabelContainer type="type">
-                    <RadioButton
-                        type="type"
-                        className="form_radio_button"
-                        options={["tv", "movie", "ova", "special", "ona", "music"]}
-                        checked={formdata.type}
-                        isVertical={true}
-                        setChosenCallback={(type) => {
-                            setFormData({ ...formdata, type: type });
+                    <select
+                        onChange={(e) => {
+                            setFormData({ ...formdata, type: e.target.value });
                         }}
-                    />
+                    >
+                        {["tv", "movie", "ova", "special", "ona", "music"].map((value) => {
+                            return (
+                                <option key={value} value={value} selected={value === formdata.type}>
+                                    {value}
+                                </option>
+                            );
+                        })}
+                    </select>
                 </LabelContainer>
                 <LabelContainer type="status">
-                    <RadioButton
-                        type="status"
-                        className="form_radio_button"
-                        options={["complete", "airing", "upcoming"]}
-                        checked={formdata.status}
-                        isVertical={true}
-                        setChosenCallback={(status) => {
-                            setFormData({ ...formdata, status: status });
+                    <select
+                        onChange={(e) => {
+                            setFormData({ ...formdata, status: e.target.value });
                         }}
-                    />
+                    >
+                        {["complete", "airing", "upcoming"].map((value) => {
+                            return (
+                                <option key={value} value={value} selected={value === formdata.status}>
+                                    {value}
+                                </option>
+                            );
+                        })}
+                    </select>
                 </LabelContainer>
                 <LabelContainer type="Order By">
-                    <RadioButton
-                        type="orderby"
-                        className="form_radio_button"
-                        options={[
+                    <select
+                        onChange={(e) => {
+                            setFormData({ ...formdata, order_by: e.target.value });
+                        }}
+                    >
+                        {[
                             "mal_id",
                             "title",
                             "start_date",
@@ -143,13 +152,14 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                             "popularity",
                             "members",
                             "favorites"
-                        ]}
-                        checked={formdata.order_by}
-                        isVertical={true}
-                        setChosenCallback={(order) => {
-                            setFormData({ ...formdata, order_by: order });
-                        }}
-                    />
+                        ].map((value) => {
+                            return (
+                                <option key={value} value={value} selected={value === formdata.order_by}>
+                                    {value}
+                                </option>
+                            );
+                        })}
+                    </select>
                 </LabelContainer>
                 <LabelContainer type="sort">
                     <RadioButton
