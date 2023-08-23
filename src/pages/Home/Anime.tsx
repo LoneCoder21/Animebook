@@ -6,7 +6,15 @@ import { searchFormData } from "./SearchForm";
 
 // TODO - Paginate data
 
-export default function Anime({ form, setError }: { form: searchFormData; setError: Dispatch<string | null> }) {
+export default function Anime({
+    form,
+    setError,
+    setMaxPaginate
+}: {
+    form: searchFormData;
+    setError: Dispatch<string | null>;
+    setMaxPaginate: Dispatch<number>;
+}) {
     let formdata = new URLSearchParams(form).toString();
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
     let [loading, setLoading] = useState(true);
@@ -53,6 +61,7 @@ export default function Anime({ form, setError }: { form: searchFormData; setErr
                     });
                     setCards(new_cards);
                     setLoading(false);
+                    setMaxPaginate(data["pagination"]["last_visible_page"]);
                 });
             })
             .catch((err) => {

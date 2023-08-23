@@ -15,6 +15,7 @@ export type searchFormData = {
     order_by: string;
     sort: string;
     sfw: string;
+    page: string;
 };
 
 export const defaultFormData = {
@@ -24,7 +25,8 @@ export const defaultFormData = {
     status: "complete",
     order_by: "mal_id",
     sort: "desc",
-    sfw: "true"
+    sfw: "true",
+    page: "1"
 } as searchFormData;
 
 function LabelContainer({ type, children }: { type: string; children: JSX.Element }) {
@@ -36,7 +38,13 @@ function LabelContainer({ type, children }: { type: string; children: JSX.Elemen
     );
 }
 
-export default function SearchForm({ updateForm }: { updateForm: Dispatch<searchFormData> }) {
+export default function SearchForm({
+    updateForm,
+    maxpaginate
+}: {
+    updateForm: Dispatch<searchFormData>;
+    maxpaginate: number;
+}) {
     let [form, setFormData] = useState<searchFormData | null>(null);
     let [disable, setDisable] = useState(false);
 
@@ -87,7 +95,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                         placeholder="Search anime"
                         value={formdata.q}
                         onChange={(e) => {
-                            setFormData({ ...formdata, q: e.target.value });
+                            setFormData({ ...formdata, q: e.target.value, page: "1" });
                         }}
                     />
                     <button className={"search_button " + (disable ? "disabled" : "")} type="submit" disabled={disable}>
@@ -103,7 +111,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                         id="score"
                         value={formdata.max_score}
                         onChange={(e) => {
-                            setFormData({ ...formdata, max_score: e.target.value });
+                            setFormData({ ...formdata, max_score: e.target.value, page: "1" });
                         }}
                     ></input>
                 </LabelContainer>
@@ -111,7 +119,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                     <select
                         defaultValue={formdata.type}
                         onChange={(e) => {
-                            setFormData({ ...formdata, type: e.target.value });
+                            setFormData({ ...formdata, type: e.target.value, page: "1" });
                         }}
                     >
                         {["tv", "movie", "ova", "special", "ona", "music"].map((value) => {
@@ -127,7 +135,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                     <select
                         defaultValue={formdata.status}
                         onChange={(e) => {
-                            setFormData({ ...formdata, status: e.target.value });
+                            setFormData({ ...formdata, status: e.target.value, page: "1" });
                         }}
                     >
                         {["complete", "airing", "upcoming"].map((value) => {
@@ -180,7 +188,14 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                         }}
                     />
                 </LabelContainer>
-                <Pagination />
+                <Pagination
+                    width={2}
+                    max={maxpaginate}
+                    page={parseInt(formdata.page)}
+                    setPage={(num) => {
+                        setFormData({ ...formdata, page: num.toString() });
+                    }}
+                />
             </form>
         );
     } else {

@@ -6,12 +6,12 @@ import Anime from "./Anime";
 import Header from "components/header";
 import { searchFormData } from "./SearchForm";
 import { useState } from "react";
-import ErrorPage from "pages/errorpage";
 import { useNavigate } from "react-router";
 
 export default function Home() {
     let [form, setFormRequest] = useState<searchFormData | null>(null);
     const [error, setError] = useState<string | null>(null);
+    let [maxpaginate, setMaxPaginate] = useState<number>(1);
     const navigate = useNavigate();
 
     if (error) {
@@ -22,8 +22,8 @@ export default function Home() {
         <div>
             <Header />
             <div className="home">
-                <SearchForm updateForm={setFormRequest} />
-                {form && <Anime form={form} setError={setError} />}
+                <SearchForm updateForm={setFormRequest} maxpaginate={maxpaginate} />
+                {form && <Anime form={form} setError={setError} setMaxPaginate={setMaxPaginate} />}
             </div>
         </div>
     );

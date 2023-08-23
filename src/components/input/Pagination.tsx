@@ -59,14 +59,23 @@ function PaginationNumberButton({
     );
 }
 
-export default function Pagination() {
-    let [page, setPage] = useState(1);
-    let width = 2;
-    const max = 3;
+export default function Pagination({
+    width,
+    max,
+    page,
+    setPage
+}: {
+    width: number;
+    max: number;
+    page: number;
+    setPage: Dispatch<number>;
+}) {
     const length = 2 * width + 1;
+    console.log(width, max, page);
     if (max <= 1) {
         return <></>;
     }
+
     return (
         <div className="pagination">
             <PaginationNavigateButton page={Math.min(1, page - 1)} display={"«"} min={1} max={max} setPage={setPage} />
