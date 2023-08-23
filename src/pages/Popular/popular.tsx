@@ -7,6 +7,7 @@ import "assets/spinner.scss";
 import RadioButton from "components/input/RadioButton";
 import Animegrid from "components/animegrid";
 import ErrorPage from "pages/errorpage";
+import Pagination from "components/input/Pagination";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -67,35 +68,55 @@ export function Option({
 
 export function OptionsForm({
     data,
+    maxpaginate,
+    page,
+    setPage,
     disabled,
     setDataCallback
 }: {
     data: OptionState[];
+    maxpaginate: number;
+    page: number;
+    setPage: Dispatch<number>;
     disabled: boolean;
     setDataCallback: Dispatch<OptionState[]>;
 }) {
     return (
-        <div className="popular_options">
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
+        <div className="column_container">
+            <div className="popular_options">
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                    }}
+                >
+                    {query_options.map((item, index) => {
+                        // for each option
+                        return (
+                            <Option
+                                key={item.type}
+                                {...item}
+                                fullData={data}
+                                data={data[index]}
+                                disabled={disabled}
+                                setDataCallback={setDataCallback}
+                                option_index={index}
+                            />
+                        );
+                    })}
+                </form>
+            </div>
+            <Pagination
+                width={4}
+                max={maxpaginate}
+                page={page}
+                disabled={disabled}
+                setPage={(p) => {
+                    const callback = structuredClone(data) as OptionState[];
+
+                    setDataCallback(callback);
+                    setPage(p);
                 }}
-            >
-                {query_options.map((item, index) => {
-                    // for each option
-                    return (
-                        <Option
-                            key={item.type}
-                            {...item}
-                            fullData={data}
-                            data={data[index]}
-                            disabled={disabled}
-                            setDataCallback={setDataCallback}
-                            option_index={index}
-                        />
-                    );
-                })}
-            </form>
+            />
         </div>
     );
 }
@@ -105,6 +126,8 @@ export function OptionsForm({
 export default function Popular() {
     let [options, setOptions] = useState<OptionState[] | null>(null);
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);
+    let [page, setPage] = useState(1);
+    let [maxpaginate, setMaxPaginate] = useState(1);
     const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
@@ -123,6 +146,7 @@ export default function Popular() {
         setLoading(true);
         setOptions(e);
         setDisable(true);
+        setPage(1);
     };
 
     useEffect(() => {
@@ -146,7 +170,8 @@ export default function Popular() {
             "https://api.jikan.moe/v4/top/anime?" +
                 new URLSearchParams({
                     ...obj,
-                    sfw: "true"
+                    sfw: "true",
+                    page: page.toString()
                 })
         )
             .then((response) => {
@@ -184,6 +209,7 @@ export default function Popular() {
                     });
                     setCards(new_cards);
                     setLoading(false);
+                    setMaxPaginate(data["pagination"]["last_visible_page"]);
                 });
             })
             .catch((err) => {
@@ -198,7 +224,17 @@ export default function Popular() {
     return (
         <div className="popular">
             <Header />
-            {options && <OptionsForm data={options} setDataCallback={loadOptions} disabled={disable} />}
+            {options && (
+                <OptionsForm
+                    data={options}
+                    maxpaginate={maxpaginate}
+                    page={page}
+                    setPage={setPage}
+                    setDataCallback={loadOptions}
+                    disabled={disable}
+                />
+            )}
+
             <Animegrid loading={loading} cards={cards} />
         </div>
     );

@@ -115,6 +115,7 @@ export default function SearchForm({
                         value={formdata.max_score}
                         onChange={(e) => {
                             setFormData({ ...formdata, max_score: e.target.value, page: "1" });
+                            setMaxPaginate(1);
                         }}
                     ></input>
                 </LabelContainer>
@@ -140,6 +141,7 @@ export default function SearchForm({
                         defaultValue={formdata.status}
                         onChange={(e) => {
                             setFormData({ ...formdata, status: e.target.value, page: "1" });
+                            setMaxPaginate(1);
                         }}
                     >
                         {["complete", "airing", "upcoming"].map((value) => {
@@ -196,6 +198,7 @@ export default function SearchForm({
                     <Pagination
                         width={1}
                         max={maxpaginate}
+                        disabled={false}
                         page={parseInt(formdata.page)}
                         setPage={(num) => {
                             setFormData({ ...formdata, page: num.toString() });
