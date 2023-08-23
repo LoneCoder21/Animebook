@@ -22,7 +22,7 @@ export default function Home() {
         <div>
             <Header />
             <div className="home">
-                <SearchForm updateForm={setFormRequest} maxpaginate={maxpaginate} />
+                <SearchForm updateForm={setFormRequest} maxpaginate={maxpaginate} setMaxPaginate={setMaxPaginate} />
                 {form && <Anime form={form} setError={setError} setMaxPaginate={setMaxPaginate} />}
             </div>
         </div>

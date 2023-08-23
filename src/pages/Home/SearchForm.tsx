@@ -40,10 +40,12 @@ function LabelContainer({ type, children }: { type: string; children: JSX.Elemen
 
 export default function SearchForm({
     updateForm,
-    maxpaginate
+    maxpaginate,
+    setMaxPaginate
 }: {
     updateForm: Dispatch<searchFormData>;
     maxpaginate: number;
+    setMaxPaginate: Dispatch<number>;
 }) {
     let [form, setFormData] = useState<searchFormData | null>(null);
     let [disable, setDisable] = useState(false);
@@ -96,6 +98,7 @@ export default function SearchForm({
                         value={formdata.q}
                         onChange={(e) => {
                             setFormData({ ...formdata, q: e.target.value, page: "1" });
+                            setMaxPaginate(1);
                         }}
                     />
                     <button className={"search_button " + (disable ? "disabled" : "")} type="submit" disabled={disable}>
@@ -120,6 +123,7 @@ export default function SearchForm({
                         defaultValue={formdata.type}
                         onChange={(e) => {
                             setFormData({ ...formdata, type: e.target.value, page: "1" });
+                            setMaxPaginate(1);
                         }}
                     >
                         {["tv", "movie", "ova", "special", "ona", "music"].map((value) => {
@@ -188,14 +192,16 @@ export default function SearchForm({
                         }}
                     />
                 </LabelContainer>
-                <Pagination
-                    width={2}
-                    max={maxpaginate}
-                    page={parseInt(formdata.page)}
-                    setPage={(num) => {
-                        setFormData({ ...formdata, page: num.toString() });
-                    }}
-                />
+                <LabelContainer type="page">
+                    <Pagination
+                        width={1}
+                        max={maxpaginate}
+                        page={parseInt(formdata.page)}
+                        setPage={(num) => {
+                            setFormData({ ...formdata, page: num.toString() });
+                        }}
+                    />
+                </LabelContainer>
             </form>
         );
     } else {

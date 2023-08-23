@@ -71,11 +71,6 @@ export default function Pagination({
     setPage: Dispatch<number>;
 }) {
     const length = 2 * width + 1;
-    console.log(width, max, page);
-    if (max <= 1) {
-        return <></>;
-    }
-
     return (
         <div className="pagination">
             <PaginationNavigateButton page={Math.min(1, page - 1)} display={"«"} min={1} max={max} setPage={setPage} />
