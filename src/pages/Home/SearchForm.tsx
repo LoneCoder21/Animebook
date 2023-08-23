@@ -5,6 +5,7 @@ import RadioButton from "components/input/RadioButton";
 import { Dispatch, useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
+import Pagination from "components/input/Pagination";
 
 export type searchFormData = {
     q: string;
@@ -179,6 +180,7 @@ export default function SearchForm({ updateForm }: { updateForm: Dispatch<search
                         }}
                     />
                 </LabelContainer>
+                <Pagination />
             </form>
         );
     } else {

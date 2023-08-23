@@ -1,0 +1,26 @@
+.pagination {
+    button {
+        cursor: default;
+        padding: 10px;
+        margin: 0px 2px;
+        background-color: rgb(220 255 201);
+        border-radius: 5px;
+
+        &:hover:not(.disabled, .selected),
+        &.selected {
+            background-color: rgb(36 199 36);
+            color: white;
+            cursor: pointer;
+        }
+
+        &.selected {
+            cursor: default;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+    }
+}
