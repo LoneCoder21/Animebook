@@ -1,5 +1,6 @@
 import "assets/pages/Home/anime.scss";
 import Animegrid from "components/animegrid";
+import { loadImage } from "data/image";
 import { Dispatch, useEffect, useState } from "react";
 import { AnimeCardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
@@ -40,12 +41,7 @@ export default function Anime({
 
                 Promise.all(
                     new_cards.map((card) => {
-                        return new Promise<HTMLImageElement>((resolve, reject) => {
-                            const img = new Image();
-                            img.onload = () => resolve(img);
-                            img.onerror = reject;
-                            img.src = card.image;
-                        });
+                        return loadImage(card.image);
                     })
                 ).then((images: HTMLImageElement[]) => {
                     images.forEach((image, index) => {

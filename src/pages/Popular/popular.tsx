@@ -10,6 +10,7 @@ import ErrorPage from "pages/errorpage";
 import Pagination from "components/input/Pagination";
 import { getLocalStorage, setLocalStorage } from "data/storage";
 import useTimeout from "hooks/useTimeout";
+import { loadImage } from "data/image";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -170,18 +171,12 @@ export default function Popular() {
                 const cards_size = Object.keys(data["data"]).length;
 
                 for (let i = 0; i < cards_size; ++i) {
-                    let card = AnimeCardInfo.fromJson(data["data"][i]);
-                    new_cards.push(card);
+                    new_cards.push(AnimeCardInfo.fromJson(data["data"][i]));
                 }
 
                 Promise.all(
                     new_cards.map((card) => {
-                        return new Promise<HTMLImageElement>((resolve, reject) => {
-                            const img = new Image();
-                            img.onload = () => resolve(img);
-                            img.onerror = reject;
-                            img.src = card.image;
-                        });
+                        return loadImage(card.image);
                     })
                 ).then((images: HTMLImageElement[]) => {
                     images.forEach((image, index) => {
@@ -196,7 +191,7 @@ export default function Popular() {
             .catch((err) => {
                 setError(err.toString());
             });
-    }, [options]);
+    }, [options, page]);
 
     if (error) {
         return <ErrorPage msg={error} />;

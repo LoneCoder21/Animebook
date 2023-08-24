@@ -41,12 +41,12 @@ function LabelContainer({ type, children }: { type: string; children: JSX.Elemen
 }
 
 export default function SearchForm({
-    updateForm,
     maxpaginate,
+    updateForm,
     setMaxPaginate
 }: {
-    updateForm: Dispatch<searchFormData>;
     maxpaginate: number;
+    updateForm: Dispatch<searchFormData>;
     setMaxPaginate: Dispatch<number>;
 }) {
     let [form, setFormData] = useState<searchFormData | null>(null);
@@ -60,9 +60,7 @@ export default function SearchForm({
     }, [updateForm]);
 
     useEffect(() => {
-        if (form == null) {
-            return;
-        }
+        if (form == null) return;
         setLocalStorage("form", form);
     }, [form]);
 

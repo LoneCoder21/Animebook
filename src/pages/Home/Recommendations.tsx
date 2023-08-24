@@ -2,6 +2,9 @@ import { AnimeCard, AnimeCardInfo } from "components/Card";
 import Spinner from "components/loaders/spinner";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// UNUSED FILE
+
 /*
 export default function Recommendations() {
     let [cards, setCards] = useState<AnimeCardInfo[] | null>(null);

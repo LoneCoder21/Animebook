@@ -37,7 +37,7 @@ export default function Characters({ data }: { data: ListingData }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
-    useTimeout(1000, wait, setWait);
+    useTimeout(1000, wait, setWait); // wait for a second to load characters. important for rate limit restriction
 
     useEffect(() => {
         if (wait) return;
