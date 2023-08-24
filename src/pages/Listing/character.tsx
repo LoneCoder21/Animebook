@@ -2,6 +2,7 @@ import Spinner from "components/loaders/spinner";
 import { useEffect, useState } from "react";
 import { ListingData } from "./listing";
 import "assets/pages/Listing/character.scss";
+import useTimeout from "hooks/useTimeout";
 
 export class CharacterData {
     mal_id: number;
@@ -36,15 +37,7 @@ export default function Characters({ data }: { data: ListingData }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
-
-    useEffect(() => {
-        if (!wait) return;
-        // wait for a second to load characters. important for rate limit restriction
-        const timer = setTimeout(() => {
-            setWait(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [wait]);
+    useTimeout(1000, wait, setWait);
 
     useEffect(() => {
         if (wait) return;

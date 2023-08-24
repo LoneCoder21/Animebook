@@ -9,6 +9,7 @@ import Animegrid from "components/animegrid";
 import ErrorPage from "pages/errorpage";
 import Pagination from "components/input/Pagination";
 import { getLocalStorage, setLocalStorage } from "data/storage";
+import useTimeout from "hooks/useTimeout";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -128,6 +129,7 @@ export default function Popular() {
     const [error, setError] = useState<string | null>(null);
     let [loading, setLoading] = useState(true);
     let [disable, setDisable] = useState(true);
+    useTimeout(1000, disable, setDisable);
 
     useEffect(() => {
         const data = getLocalStorage("options", createOptionState());
@@ -140,14 +142,6 @@ export default function Popular() {
         setDisable(true);
         setPage(1);
     };
-
-    useEffect(() => {
-        if (!disable) return;
-        const timer = setTimeout(() => {
-            setDisable(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [disable]);
 
     useEffect(() => {
         if (options == null) return;

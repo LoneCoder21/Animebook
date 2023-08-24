@@ -7,6 +7,7 @@ import { Dispatch, useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Pagination from "components/input/Pagination";
 import { getLocalStorage, setLocalStorage } from "data/storage";
+import useTimeout from "hooks/useTimeout";
 
 export type searchFormData = {
     q: string;
@@ -50,6 +51,7 @@ export default function SearchForm({
 }) {
     let [form, setFormData] = useState<searchFormData | null>(null);
     let [disable, setDisable] = useState(false);
+    useTimeout(1000, disable, setDisable);
 
     useEffect(() => {
         const data = getLocalStorage("form", defaultFormData);
@@ -63,14 +65,6 @@ export default function SearchForm({
         }
         setLocalStorage("form", form);
     }, [form]);
-
-    useEffect(() => {
-        if (!disable) return;
-        const timer = setTimeout(() => {
-            setDisable(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [disable]);
 
     if (form !== null) {
         let formdata = form;
