@@ -41,7 +41,7 @@ export default function Characters({ data }: { data: ListingData }) {
 
     useEffect(() => {
         if (wait) return;
-        //after wait we fetch the characters and display it
+        // after wait we fetch the characters and display it
         fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
             .then((response) => {
                 if (!response.ok) {
