@@ -6,6 +6,7 @@ import { Dispatch, useEffect, useState } from "react";
 
 import { BsSearch } from "react-icons/bs";
 import Pagination from "components/input/Pagination";
+import { getLocalStorage, setLocalStorage } from "data/storage";
 
 export type searchFormData = {
     q: string;
@@ -51,23 +52,16 @@ export default function SearchForm({
     let [disable, setDisable] = useState(false);
 
     useEffect(() => {
-        const l = localStorage.getItem("form")!;
-        const formstorage = JSON.parse(l);
-        if (formstorage) {
-            setFormData(formstorage);
-            updateForm(formstorage);
-        } else {
-            setFormData(defaultFormData);
-            updateForm(defaultFormData);
-        }
+        const data = getLocalStorage("form", defaultFormData);
+        setFormData(data);
+        updateForm(data);
     }, [updateForm]);
 
     useEffect(() => {
         if (form == null) {
             return;
         }
-        const s = JSON.stringify(form);
-        localStorage.setItem("form", s);
+        setLocalStorage("form", form);
     }, [form]);
 
     useEffect(() => {

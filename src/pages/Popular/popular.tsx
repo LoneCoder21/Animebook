@@ -8,6 +8,7 @@ import RadioButton from "components/input/RadioButton";
 import Animegrid from "components/animegrid";
 import ErrorPage from "pages/errorpage";
 import Pagination from "components/input/Pagination";
+import { getLocalStorage, setLocalStorage } from "data/storage";
 
 const query_options = [
     { type: "type", options: ["tv", "movie", "ova", "special", "ona", "music"] },
@@ -129,13 +130,8 @@ export default function Popular() {
     let [disable, setDisable] = useState(true);
 
     useEffect(() => {
-        const l = localStorage.getItem("options")!;
-        const optionstorage = JSON.parse(l);
-        if (optionstorage) {
-            setOptions(optionstorage);
-        } else {
-            setOptions(createOptionState());
-        }
+        const data = getLocalStorage("options", createOptionState());
+        setOptions(data);
     }, []);
 
     let loadOptions = (e: OptionState[]) => {
@@ -155,8 +151,7 @@ export default function Popular() {
 
     useEffect(() => {
         if (options == null) return;
-        const s = JSON.stringify(options);
-        localStorage.setItem("options", s);
+        setLocalStorage("options", options);
 
         const mapped = options.map((item) => ({
             [item.type]: item.option
