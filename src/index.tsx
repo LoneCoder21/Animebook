@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/listing/:id",
-        element: <ListingEntry></ListingEntry>
+        element: <ListingEntry />
     }
 ]);
 

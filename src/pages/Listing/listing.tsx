@@ -107,9 +107,9 @@ function Listing({ data }: { data: ListingData }) {
 export default function ListingEntry() {
     const { id } = useParams();
 
-    const [listingdata, setListingData] = useState<ListingData | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [listingdata, setListingData] = useState<ListingData | null>(null);
 
     useEffect(() => {
         if (id === undefined) return;
@@ -131,7 +131,9 @@ export default function ListingEntry() {
 
     if (error) {
         return <ErrorPage msg={error} />;
+    } else if (loading || !listingdata) {
+        return <LoadPage />;
+    } else {
+        return <Listing data={listingdata} />;
     }
-
-    return !loading && listingdata !== null ? <Listing data={listingdata} /> : <LoadPage />;
 }

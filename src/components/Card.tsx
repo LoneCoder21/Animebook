@@ -28,6 +28,7 @@ export class CardInfo {
         };
     } //sort images by decreasing height so it looks better on the grid
 }
+
 export class AnimeCardInfo extends CardInfo {
     mal_id: number;
 

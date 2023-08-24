@@ -42,11 +42,7 @@ export function Option({
     fullData: OptionState[];
     setDataCallback: Dispatch<OptionState[]>;
 }) {
-    let newfullData = fullData.map((item) => {
-        return {
-            ...item
-        };
-    }); //clone the full data
+    let newfullData = structuredClone(fullData) as typeof fullData;
 
     return (
         <fieldset>
@@ -111,7 +107,7 @@ export function OptionsForm({
                 page={page}
                 disabled={disabled}
                 setPage={(p) => {
-                    const callback = structuredClone(data) as OptionState[];
+                    const callback = structuredClone(data) as typeof data;
 
                     setDataCallback(callback);
                     setPage(p);
@@ -184,15 +180,6 @@ export default function Popular() {
                 let new_cards: AnimeCardInfo[] = [];
                 const cards_size = Object.keys(data["data"]).length;
 
-                const loadImage = (src: string) => {
-                    return new Promise<HTMLImageElement>((resolve, reject) => {
-                        const img = new Image();
-                        img.onload = () => resolve(img);
-                        img.onerror = reject;
-                        img.src = src;
-                    });
-                };
-
                 for (let i = 0; i < cards_size; ++i) {
                     let card = AnimeCardInfo.fromJson(data["data"][i]);
                     new_cards.push(card);
@@ -200,7 +187,12 @@ export default function Popular() {
 
                 Promise.all(
                     new_cards.map((card) => {
-                        return loadImage(card.image);
+                        return new Promise<HTMLImageElement>((resolve, reject) => {
+                            const img = new Image();
+                            img.onload = () => resolve(img);
+                            img.onerror = reject;
+                            img.src = card.image;
+                        });
                     })
                 ).then((images: HTMLImageElement[]) => {
                     images.forEach((image, index) => {

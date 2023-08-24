@@ -32,9 +32,10 @@ function Character({ data }: { data: CharacterData }) {
 }
 
 export default function Characters({ data }: { data: ListingData }) {
-    const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
     const [wait, setWait] = useState(true);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
 
     useEffect(() => {
         if (wait) {
@@ -67,25 +68,26 @@ export default function Characters({ data }: { data: ListingData }) {
                     setCharacterData(new_cards);
                 })
                 .catch((err) => {
-                    setCharacterData([]); //don't display characters when an error happens
+                    setError(err.toString());
                 });
         }
     }, [wait, data.id]);
 
-    if (characterdata?.length === 0) {
+    if (error) {
+        // don't display characters when an error happens
         return <></>;
-    }
-
-    return !loading && characterdata !== null ? (
-        <div className="characters">
-            <h4>Characters</h4>
-            <div className="listings">
-                {characterdata.map((character, index) => {
-                    return <Character key={index} data={character} />;
-                })}
+    } else if (loading || !characterdata) {
+        return <Spinner />;
+    } else {
+        return (
+            <div className="characters">
+                <h4>Characters</h4>
+                <div className="listings">
+                    {characterdata.map((character, index) => {
+                        return <Character key={index} data={character} />;
+                    })}
+                </div>
             </div>
-        </div>
-    ) : (
-        <Spinner />
-    );
+        );
+    }
 }

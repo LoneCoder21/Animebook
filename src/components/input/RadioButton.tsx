@@ -20,18 +20,19 @@ export default function RadioButton({
     return (
         <fieldset className={className}>
             {options.map((item) => {
+                const selected = checked === item;
                 return (
                     <Fragment key={item}>
                         <button
                             type="button"
                             className={
-                                (checked === item ? "selected " : " ") +
+                                (selected ? "selected " : " ") +
                                 (disabled ? "disabled " : " ") +
                                 (isVertical ? "vertical " : " ")
                             }
                             onClick={() => {
-                                if (checked === item) return;
-                                if (!disabled) setChosenCallback(item);
+                                if (selected || disabled) return;
+                                setChosenCallback(item);
                             }}
                         >
                             <input
@@ -39,7 +40,7 @@ export default function RadioButton({
                                 id={`${type}-${item}`}
                                 value={item}
                                 name={type}
-                                checked={checked === item}
+                                checked={selected}
                                 disabled={disabled}
                                 onChange={() => {}}
                             />
