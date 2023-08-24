@@ -39,7 +39,7 @@ export default function Characters({ data }: { data: ListingData }) {
 
     useEffect(() => {
         if (!wait) return;
-        //wait for a second to load characters. important for rate limit restriction
+        // wait for a second to load characters. important for rate limit restriction
         const timer = setTimeout(() => {
             setWait(false);
         }, 1000);
