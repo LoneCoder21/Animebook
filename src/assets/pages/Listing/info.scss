@@ -45,10 +45,10 @@
         // a lerp from red to green
 
         .score {
-            border-color: hsl(calc(var(--score) * 120) 100% 50%);
+            border-color: hsl(calc(var(--score) * 90) 100% 50%);
 
             .value {
-                color: hsl(calc(var(--score) * 120) 80% 30%);
+                color: hsl(calc(var(--score) * 90) 80% 30%);
             }
         }
     }
