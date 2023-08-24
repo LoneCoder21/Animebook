@@ -38,39 +38,41 @@ export default function Characters({ data }: { data: ListingData }) {
     const [characterdata, setCharacterData] = useState<CharacterData[] | null>(null);
 
     useEffect(() => {
-        if (wait) {
-            //wait for a second to load characters. important for rate limit restriction
-            const timer = setTimeout(() => {
-                setWait(false);
-            }, 1000);
-            return () => clearTimeout(timer);
-        } else {
-            //after wait we fetch the characters and display it
-            fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`${response.status} - ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    let new_cards: CharacterData[] = [];
-                    const cards_size = Object.keys(data["data"]).length;
+        if (!wait) return;
+        //wait for a second to load characters. important for rate limit restriction
+        const timer = setTimeout(() => {
+            setWait(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [wait]);
 
-                    for (let i = 0; i < cards_size; ++i) {
-                        let character = CharacterData.fromJson(data["data"][i]);
-                        if (character.image) {
-                            new_cards.push(character);
-                        } // ignore null images characters
-                    }
+    useEffect(() => {
+        if (wait) return;
+        //after wait we fetch the characters and display it
+        fetch(`https://api.jikan.moe/v4/anime/${data.id}/characters`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`${response.status} - ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let new_cards: CharacterData[] = [];
+                const cards_size = Object.keys(data["data"]).length;
 
-                    setLoading(false);
-                    setCharacterData(new_cards);
-                })
-                .catch((err) => {
-                    setError(err.toString());
-                });
-        }
+                for (let i = 0; i < cards_size; ++i) {
+                    let character = CharacterData.fromJson(data["data"][i]);
+                    if (character.image) {
+                        new_cards.push(character);
+                    } // ignore null images characters
+                }
+
+                setLoading(false);
+                setCharacterData(new_cards);
+            })
+            .catch((err) => {
+                setError(err.toString());
+            });
     }, [wait, data.id]);
 
     if (error) {
