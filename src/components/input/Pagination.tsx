@@ -1,28 +1,31 @@
-import { Dispatch, useState } from "react";
+import { Dispatch } from "react";
 import "assets/input/pagination.scss";
 
 function PaginationNavigateButton({
     page,
     display,
-    disabled,
+    disable,
     min,
     max,
     setPage
 }: {
     page: number;
     display: string;
-    disabled: boolean;
+    disable: boolean;
     min: number;
     max: number;
     setPage: Dispatch<number>;
 }) {
-    let isinrange = page >= min && page <= max;
+    const isinrange = page >= min && page <= max;
+    const disabled = disable || !isinrange;
+
     return (
         <button
             type="button"
-            className={disabled || !isinrange ? "disabled " : ""}
-            disabled={disabled || !isinrange}
+            className={disabled ? "disabled " : " "}
+            disabled={disabled}
             onClick={() => {
+                if (disabled) return;
                 setPage(page);
             }}
         >
@@ -34,7 +37,7 @@ function PaginationNavigateButton({
 function PaginationNumberButton({
     page,
     display,
-    disabled,
+    disable,
     min,
     max,
     selectedpage,
@@ -42,19 +45,23 @@ function PaginationNumberButton({
 }: {
     page: number;
     display: string;
-    disabled: boolean;
+    disable: boolean;
     min: number;
     max: number;
     selectedpage: number | null;
     setPage: Dispatch<number>;
 }) {
-    let isinrange = page >= min && page <= max;
+    const isinrange = page >= min && page <= max;
+    const disabled = disable || !isinrange;
+    const selected = selectedpage === page;
+
     return (
         <button
             type="button"
-            className={disabled || !isinrange ? "disabled " : "" + (selectedpage === page ? "selected " : " ")}
-            disabled={disabled || !isinrange}
+            className={(disabled ? "disabled " : " ") + (selected ? "selected " : " ")}
+            disabled={disabled}
             onClick={() => {
+                if (disabled || selected) return;
                 setPage(page);
             }}
         >
@@ -82,7 +89,7 @@ export default function Pagination({
             <PaginationNavigateButton
                 page={Math.min(1, page - 1)}
                 display={"«"}
-                disabled={disabled}
+                disable={disabled}
                 min={1}
                 max={max}
                 setPage={setPage}
@@ -90,7 +97,7 @@ export default function Pagination({
             <PaginationNavigateButton
                 page={page - 1}
                 display={"‹"}
-                disabled={disabled}
+                disable={disabled}
                 min={1}
                 max={max}
                 setPage={setPage}
@@ -101,7 +108,7 @@ export default function Pagination({
                     <PaginationNumberButton
                         key={index}
                         page={value}
-                        disabled={disabled}
+                        disable={disabled}
                         display={value.toString()}
                         min={1}
                         max={max}
@@ -113,7 +120,7 @@ export default function Pagination({
             <PaginationNavigateButton
                 page={page + 1}
                 display={"›"}
-                disabled={disabled}
+                disable={disabled}
                 min={1}
                 max={max}
                 setPage={setPage}
@@ -121,7 +128,7 @@ export default function Pagination({
             <PaginationNavigateButton
                 page={Math.max(max, page + 1)}
                 display={"»"}
-                disabled={disabled}
+                disable={disabled}
                 min={1}
                 max={max}
                 setPage={setPage}

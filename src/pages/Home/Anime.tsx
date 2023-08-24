@@ -4,8 +4,6 @@ import { Dispatch, useEffect, useState } from "react";
 import { AnimeCardInfo } from "../../components/Card";
 import { searchFormData } from "./SearchForm";
 
-// TODO - Paginate data
-
 export default function Anime({
     form,
     setError,

@@ -6,7 +6,7 @@
         background-color: rgb(220 255 201);
         border-radius: 5px;
 
-        &:hover:not(.disabled, .selected),
+        &:hover:not(.selected, .disabled),
         &.selected {
             background-color: rgb(36 199 36);
             color: white;
