@@ -13,4 +13,28 @@
     p {
         margin: 0;
     }
+
+    .main {
+        display: flex;
+
+        .display {
+            flex: 1;
+        }
+
+        .synopsis {
+            flex: 4;
+        }
+
+        .infolayout {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .side {
+        display: flex;
+    }
 }

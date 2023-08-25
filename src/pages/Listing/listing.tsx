@@ -88,18 +88,44 @@ export class ListingData {
     }
 }
 
+function InfoLayout({ data }: { data: ListingData }) {
+    return (
+        <div className="infolayout">
+            <div>
+                <Premiere data={data} />
+                <Type data={data} />
+            </div>
+            <Rating data={data} />
+            <Info data={data} />
+        </div>
+    );
+}
+
+function MainContent({ data }: { data: ListingData }) {
+    return (
+        <div className="main">
+            <DisplayCard data={data} />
+            <Synopsis data={data} />
+            <InfoLayout data={data} />
+        </div>
+    );
+}
+
+function SideContent({ data }: { data: ListingData }) {
+    return (
+        <div className="side">
+            <Trailer data={data} />
+            <Characters data={data} />
+        </div>
+    );
+}
+
 function Listing({ data }: { data: ListingData }) {
     return (
         <div className="listing">
             <Header />
-            <DisplayCard data={data} />
-            <Synopsis data={data} />
-            <Premiere data={data} />
-            <Type data={data} />
-            <Rating data={data} />
-            <Info data={data} />
-            <Trailer data={data} />
-            <Characters data={data} />
+            <MainContent data={data} />
+            <SideContent data={data} />
         </div>
     );
 }

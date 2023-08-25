@@ -5,7 +5,7 @@ import "assets/pages/Listing/maininfo.scss";
 export function DisplayCard({ data }: { data: ListingData }) {
     return (
         <div className="display">
-            <h3>{data.title}</h3>
+            <h2>{data.title}</h2>
             <img src={data.image} alt={data.title} />
             <Tags data={data} />
         </div>
@@ -15,7 +15,7 @@ export function DisplayCard({ data }: { data: ListingData }) {
 export function Synopsis({ data }: { data: ListingData }) {
     return (
         <div className="synopsis">
-            <h3>Synopsis</h3>
+            <h2>Synopsis</h2>
             <p>{data.synopsis ? data.synopsis : "No synopsis found"}</p>
         </div>
     );
