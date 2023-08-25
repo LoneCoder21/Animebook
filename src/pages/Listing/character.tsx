@@ -76,7 +76,7 @@ export default function Characters({ data }: { data: ListingData }) {
     } else {
         return (
             <div className="characters">
-                <h4>Characters</h4>
+                <h3>Characters</h3>
                 <div className="listings">
                     {characterdata.map((character, index) => {
                         return <Character key={index} data={character} />;

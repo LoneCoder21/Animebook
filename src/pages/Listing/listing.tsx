@@ -114,8 +114,8 @@ function MainContent({ data }: { data: ListingData }) {
 function SideContent({ data }: { data: ListingData }) {
     return (
         <div className="side">
-            <Trailer data={data} />
             <Characters data={data} />
+            <Trailer data={data} />
         </div>
     );
 }

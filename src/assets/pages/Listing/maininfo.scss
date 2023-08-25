@@ -5,7 +5,7 @@
         flex-direction: column;
         width: 225px;
 
-        h3 {
+        h2 {
             margin-bottom: 5px;
             word-break: break-all;
             overflow-wrap: break-word;
@@ -14,14 +14,14 @@
     }
 
     .synopsis {
-        h4 {
-            margin-bottom: 5px;
-        }
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
 
         p {
             display: inline-block;
             text-align: left;
-            font-size: 21px;
+            font-size: 25px;
         }
     }
 

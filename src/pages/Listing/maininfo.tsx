@@ -15,7 +15,7 @@ export function DisplayCard({ data }: { data: ListingData }) {
 export function Synopsis({ data }: { data: ListingData }) {
     return (
         <div className="synopsis">
-            <h2>Synopsis</h2>
+            <h1>Synopsis</h1>
             <p>{data.synopsis ? data.synopsis : "No synopsis found"}</p>
         </div>
     );
