@@ -43,7 +43,6 @@ export default function Info({ data }: { data: ListingData }) {
             <Stats data={data} />
             <InfoAttribute type="Episodes" value={data.episodes ? data.episodes : "Unknown"} />
             <InfoAttribute type="Duration" value={data.duration} />
-            <InfoAttribute type="Rating" value={data.rating} />
 
             <InfoAttribute type="Status" value={data.airing.status} />
             <InfoAttribute type="Aired" value={data.airing.description} />

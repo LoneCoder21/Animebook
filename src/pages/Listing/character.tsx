@@ -68,7 +68,7 @@ export default function Characters({ data }: { data: ListingData }) {
             });
     }, [wait, data.id]);
 
-    if (error) {
+    if (error || characterdata?.length === 0) {
         // don't display characters when an error happens
         return <></>;
     } else if (loading || !characterdata) {
