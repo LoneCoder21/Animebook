@@ -1,5 +1,4 @@
 .listing {
-
     h1,
     h2,
     h3,
@@ -36,7 +35,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            justify-content: start;
+            justify-content: flex-start;
             padding-top: 10px;
         }
     }
