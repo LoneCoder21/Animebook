@@ -1,10 +1,11 @@
 .trailer {
     display: flex;
     justify-content: center;
+    margin: 0 5px;
 
     .content {
         width: 100vw;
-        height: 33vw;
-        margin: 10px 20%;
+        aspect-ratio: 16/9;
+        max-width: 1200px;
     }
 }

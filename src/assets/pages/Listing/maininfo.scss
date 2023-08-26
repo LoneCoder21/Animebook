@@ -11,12 +11,17 @@
             overflow-wrap: break-word;
             text-align: center;
         }
+
+        img {
+            max-width: none;
+        }
     }
 
     .synopsis {
         display: flex;
         flex-direction: column;
         justify-content: start;
+        min-width: 400px;
 
         p {
             display: inline-block;
