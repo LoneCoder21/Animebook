@@ -26,7 +26,7 @@
         p {
             display: inline-block;
             text-align: left;
-            font-size: 25px;
+            font-size: 22px;
         }
     }
 
@@ -46,6 +46,8 @@
     }
 
     .premiere {
+        font-size: 20px;
+
         &.spring {
             background-color: rgb(95 238 13);
         }
@@ -68,7 +70,7 @@
         margin: 5px 0px;
 
         p {
-            font-size: 16px;
+            font-size: max(16px, 0.8vw);
         }
     }
 
@@ -83,7 +85,7 @@
             padding: 3px;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: max(14px, 0.6vw);
         }
     }
 }
