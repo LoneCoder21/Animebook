@@ -1,9 +1,11 @@
 .pagination {
+    margin: 5px;
+
     button {
         cursor: default;
         padding: 10px;
         margin: 0px 2px;
-        background-color: rgb(220 255 201);
+        background-color: rgb(244 255 238);
         border-radius: 5px;
 
         &:hover:not(.selected, .disabled),

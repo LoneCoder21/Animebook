@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     opacity: 0.9;
+    margin: 0 5px;
 
     p {
         font-size: 20px;
@@ -36,11 +37,13 @@
 }
 
 .popular {
+
     .grid_container {
         margin: 0px 20%;
     }
 }
 
 .popular_radio_button {
+
     @include radiobutton.radiobutton(green, rgb(75, 224, 125));
 }

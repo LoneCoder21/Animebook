@@ -33,13 +33,10 @@
             opacity: 1;
             border: 0;
             margin: 5px 0px;
+            outline: 1px solid;
 
             @media (width <= 600px) {
                 width: 100%;
-            }
-
-            &:hover {
-                outline: 1px solid;
             }
 
             &:focus {
