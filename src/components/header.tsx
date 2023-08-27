@@ -28,7 +28,7 @@ export default function Header() {
     return (
         <header>
             <div className="left">
-                <HeaderItem to="/" name="AnimeBook">
+                <HeaderItem to="/" name="AnimeBooks">
                     <BsFillBookFill className="icon" size={25} />
                 </HeaderItem>
             </div>
