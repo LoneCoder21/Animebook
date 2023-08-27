@@ -56,7 +56,7 @@ export default function Anime({
             .catch((err) => {
                 setError(err.toString());
             });
-    }, [loading, formdata, setError]);
+    }, [loading, formdata, setError, setMaxPaginate]);
 
     return (
         <div className="anime">
