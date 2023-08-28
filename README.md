@@ -4,6 +4,9 @@ Animebooks is a web app created for the purpose of viewing anime listings. The a
 
 ## Screenshots
 
+![Home](src/assets/images/home.png)
+![Listing](src/assets/images/listing.png)
+
 ## Host
 
 The project is hosted on [animebooks.netlify.app](https://animebooks.netlify.app/) and uses [Netlify](https://www.netlify.com/)
@@ -26,6 +29,10 @@ The project is hosted on [animebooks.netlify.app](https://animebooks.netlify.app
 ### Routing
 
 -   The project uses client side routing with [React Router](https://reactrouter.com/)
+
+### API
+
+-   All the network requests and data are provided by [Jikan API](https://jikan.moe/)
 
 ## Installation
 
